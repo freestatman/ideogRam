@@ -1,0 +1,9 @@
+dependencies:
+  - name: Ideogram
+    version: 4.1.1
+    src: htmlwidgets/ideogram/dist
+    stylesheet: css/ideogram.css
+    script: 
+      - js/ideogram.min.js
+      
+    

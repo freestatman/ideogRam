@@ -4,7 +4,7 @@ ideogRam is an R htmlwidget wrapper package for Eric Weitz's ideogram.js[https:/
 
 ## Install
 
-install_github("wangtulao/ideogRam")
+devtools::install_github("wangtulao/ideogRam")
 
 ## Example
 

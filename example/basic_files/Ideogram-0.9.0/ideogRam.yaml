@@ -1,6 +1,6 @@
 dependencies:
   - name: Ideogram
-    version: 4.1.1
+    version: 0.9.0
     src: htmlwidgets
     stylesheet: lib/ideogram.css
     script: 

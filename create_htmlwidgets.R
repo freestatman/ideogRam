@@ -1,6 +1,3 @@
-library(plyr)
-library(tidyverse)
-options(tibble.width = Inf)
 theme_set(theme_bw())
 library(htmlwidgets)
 
@@ -18,17 +15,15 @@ devtools::build()                       # build R package
 
 
 
-
-
 #----------------------------------------------------------------------------
-# test ideogRam via examples
+# ideogRam examples
 #   examples were replicated from https://github.com/eweitz/ideogram/tree/master/examples
 #----------------------------------------------------------------------------
 library(ideogRam)
 library(htmlwidgets)
 
-setwd("~/github/ideogRam") # navigate to package dir
-devtools::install()        # install the package so we can try it
+setwd("~/github/ideogRam")
+devtools::install()        
 library(ideogRam)
 
 
@@ -36,26 +31,23 @@ library(ideogRam)
 ## example 1  ##
 ################
 ideo_config <- list(organism='human',
-                  #dataDir='../data/bands/native',
-                  orientation='horizontal',
-                  annotations=list(list(name='xxx', 
-                                     chr='2',
-                                     start=34294,
-                                     stop=125482
-                                     ),
-                                list(name='BRCA1', 
-                                     chr='17',
-                                     start=43125400,
-                                     stop=43125482))
-                  )
+                    orientation='horizontal',
+                    annotations=list(list(name='xxx', 
+                                          chr='2',
+                                          start=34294,
+                                          stop=125482
+                                          ),
+                                     list(name='BRCA1', 
+                                          chr='17',
+                                          start=43125400,
+                                          stop=43125482))
+                    )
 htmlwidgets:::toJSON(ideo_config)
 jsonlite::toJSON(ideo_config)
 
 p <- ideogRam(data=ideo_config, message=NULL)
-htmlwidgets::saveWidget(p, '~/github/ideogRam/example/basic.html', selfcontained = TRUE)
-
-# TODO: ideogram js function expect to import data from data/band/, which need manual copy for now
-system('cp -r /home/freeman/github/ideogRam/example/index_files/Ideogram-4.1.1/data /home/freeman/github/ideogRam/example/')
+#htmlwidgets::saveWidget(p, '~/github/ideogRam/example/basic.html', selfcontained = TRUE)
+htmlwidgets::saveWidget(p, '~/github/ideogRam/example/basic.html', selfcontained = FALSE)
 
 
 ################
@@ -68,24 +60,34 @@ annotationTracks = list(
                         )
 
 ideo_config <- list(organism='human',
-                  #dataDir='../data/bands/native',
-                  orientation='horizontal',
-                  chrWidth=8,
-                  annotationsPath = "../data/annotations/1000_virtual_snvs.json",
-                  annotationTracks = annotationTracks
-                  )
+                    #dataDir='../data/bands/native',
+                    orientation='horizontal',
+                    chrWidth=8,
+                    annotationsPath = "/annotations_tracks_files/Ideogram-0.9.0/data/annotations/1000_virtual_snvs.json",
+                    annotationTracks = annotationTracks
+                    )
 
 p <- ideogRam(data=ideo_config, message=NULL)
 htmlwidgets::saveWidget(p, '~/github/ideogRam/example/annotations_tracks.html', selfcontained = FALSE)
 
 
-#----------------------------------------------------------------------------
-# TODO: not work in Shiny yet, due to the exclusion of data/ folder by htmlwidgets's default scaffold
-#----------------------------------------------------------------------------
-if (TRUE)  {     # ## test in Shiny
+if (TRUE)  {     # ## test in Shiny, Ideogram 0.9.0 start working for Shiny!
 
     library(shiny)
     library(ideogRam)
+
+    ideo_config <- list(organism='human',
+                        orientation='horizontal',
+                        annotations=list(list(name='xxx', 
+                                              chr='2',
+                                              start=34294,
+                                              stop=125482
+                                              ),
+                                         list(name='BRCA1', 
+                                              chr='17',
+                                              start=43125400,
+                                              stop=43125482))
+                        )
 
     #----------------------------------------------------------------------------
     # shiny example
@@ -106,10 +108,6 @@ if (TRUE)  {     # ## test in Shiny
 
 }    # End 
 
-
-# TODO: some js function expect to import json from data/, which need manual 
-system('cp -r /home/freeman/github/ideogRam/example/index_files/Ideogram-4.1.1/data /home/freeman/github/ideogRam/example/')
-system('gnome-open ~/github/ideogRam/example/index.html')
 
 
 

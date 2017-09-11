@@ -1,9 +1,9 @@
 Package: ideogRam
-Title: What the Package Does (one line, title case)
-Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
-Depends: R (>= 3.4.1)
-License: What license is it under?
+Title: ideogRam R htmlwidget
+Version: 0.0.1
+Authors@R: person("Freeman", "Wang", email = "freestatman@gmail.com", role = c("aut", "cre"))
+Description: ideogRam is an R htmlwidget wrapper package for Eric Weitz's ideogram.js [https://github.com/eweitz/ideogram]
+Depends: R (>= 3.3.1)
+License: CC0 (Creative Commons CC0 1.0 Universal)
 Encoding: UTF-8
 LazyData: true

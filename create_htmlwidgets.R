@@ -1,4 +1,9 @@
-library(htmlwidgets)
+#---- libs
+library(plyr)
+library(tidyverse)
+options(tibble.width = Inf)
+theme_set(theme_bw())
+
 
 #----------------------------------------------------------------------------
 # build the htmlwidgets
@@ -58,18 +63,42 @@ annotationTracks = list(
                         )
 
 ideo_01_config <- list(organism='human',
-                    #dataDir='../data/bands/native',
-                    orientation='horizontal',
-                    chrWidth=8,
-                    annotationsPath = "/annotations_tracks_files/Ideogram-0.9.0/data/annotations/1000_virtual_snvs.json",
-                    annotationTracks = annotationTracks
-                    )
+                       orientation='horizontal',
+                       chrWidth=8,
+                       annotationsPath = "/annotations_tracks_files/Ideogram-0.9.0/data/annotations/1000_virtual_snvs.json",
+                       annotationTracks = annotationTracks
+                       )
 
 p <- ideogRam(data=ideo_01_config, message=NULL)
 htmlwidgets::saveWidget(p, '~/github/ideogRam/example/annotations_tracks.html', selfcontained = FALSE)
 
+################
+## example 3  ##
+################
 
-if (TRUE)  {     # ## test in Shiny, Ideogram 0.9.0 start working for Shiny!
+# test native url input for annotationsPath: e.g. "https://unpkg.com/ideogram@0.9.0/dist/data/annotations/10_virtual_cnvs.json",
+# https://github.com/eweitz/ideogram/issues/78
+# var config = {
+#       organism: "human",
+#   annotationsPath: "https://unpkg.com/ideogram@0.9.0/dist/data/annotations/10_virtual_cnvs.json",
+#     annotationsLayout: "overlay"
+# };
+# var ideogram = new Ideogram(config);
+
+ideo_01_config <- list(organism='human',
+                       annotationsPath =  "https://unpkg.com/ideogram@0.9.0/dist/data/annotations/10_virtual_cnvs.json",
+                       annotationsLayout = "overlay" 
+                       )
+
+p <- ideogRam(data=ideo_01_config, message=NULL)
+htmlwidgets::saveWidget(p, '~/github/ideogRam/example/annotations_tracks_urlPath.html', selfcontained = FALSE)
+
+
+
+################
+##   Shiny    ##
+################
+if (TRUE)  {     ## test in Shiny, Ideogram 0.9.0 start working for Shiny!
 
     library(shiny)
     library(ideogRam)

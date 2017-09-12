@@ -7,7 +7,12 @@
 #' @export
 ideogRam <- function(data, message, width = NULL, height = NULL, elementId = NULL) {
 
-    #data$container = paste0('#', elementId)
+    if (is.null(elementId)) {
+        elementId <- paste0('ideogRam_', tempfile() %>% basename()) 
+        # avoid using - or ., which will make trouble for bind ID via: document.querySelector("body").innerHTML += container;
+    }
+
+    data$container = paste0('#', elementId)
 
     # forward options using x
     x = list(
@@ -27,25 +32,6 @@ ideogRam <- function(data, message, width = NULL, height = NULL, elementId = NUL
 }
 
 
-
-ideogRam_old <- function(message, width = NULL, height = NULL, elementId = NULL) {
-
-    # forward options using x
-    x = list(
-             #data = htmlwidgets:::toJSON(data),
-             message = message
-             )
-
-    # create widget
-    htmlwidgets::createWidget(
-                              name = 'ideogRam',
-                              x,
-                              width = width,
-                              height = height,
-                              package = 'ideogRam',
-                              elementId = elementId
-                              )
-}
 
 #' Shiny bindings for ideogRam
 #'

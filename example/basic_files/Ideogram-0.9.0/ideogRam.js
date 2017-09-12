@@ -8,38 +8,14 @@ HTMLWidgets.widget({
 
       // TODO: define shared variables for this instance
       // create our ideogram object and bind it to the element
-      // var ideogram = new Ideogram({
-      //     organism: 'human',
-      //     annotations: [
-      //         {
-      //             name: 'BRCA1',
-      //             chr: '17',
-      //             //start: 43044294,
-      //             start: 044294,
-      //             stop: 43125482
-      //         },
-      //         {
-      //             name: 'BRCA1',
-      //             chr: '7',
-      //             start: 94,
-      //             stop: 43125482
-      //         }
-      //     ]
-      // });
-
-      // var ideogram = new Ideogram(x.data)
-      //var elementId = el.id;
-      //var container = document.getElementById(elementId);
-      //var ideogram = new Ideogram({
-      //    organism: 'human'
-      //});
+      var elementId = el.id;
+      console.log(elementId);
+      container = '<div id="' + elementId + '"></div>';
+      document.querySelector("body").innerHTML += container;
 
       return {
 
           renderValue: function(x) {
-              //var parser = new DOMParser();
-              //var data = parser.parseFromString(x.data, "application/xml");
-              //console.log(data)
 
               var ideogram = new Ideogram(x.data);
               console.log(x.data);

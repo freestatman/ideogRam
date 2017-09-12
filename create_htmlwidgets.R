@@ -1,4 +1,3 @@
-#---- libs
 library(plyr)
 library(tidyverse)
 options(tibble.width = Inf)
@@ -163,7 +162,7 @@ if (TRUE)  {     # Shiny example 2: 2 ideogram graph
         ideo_02_config <- list(organism='human',
                                orientation='vertical',
                                annotations=list(list(name='xxx', 
-                                                     chr='1',
+                                                     chr='2',
                                                      start=1134294,
                                                      stop =1165482
                                                      ),
@@ -188,7 +187,7 @@ if (TRUE)  {     # Shiny example 2: 2 ideogram graph
     }
 
     ui <- shinyUI( fluidPage(
-                             titlePanel("Hello Ideogram!"),
+                             titlePanel("Hello IdeogRam!"),
                              sidebarPanel(width=2,
                                           numericInput("chr", "Chromosome:", 2, min = 1, max = 26)
                                           ),

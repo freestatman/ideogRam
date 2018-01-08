@@ -8,7 +8,7 @@ devtools::install_github("wangtulao/ideogRam")
 
 ## Example
 
-See create_htmlwidgets.R and example/ for some basic examples. more documentation is on the way...
+See [example/ideogRam_examples.R](https://github.com/wangtulao/ideogRam/blob/master/example/ideogRam_examples.R) for some basic examples. more documentation is on the way...
 
 ## TODO
 * Link container id

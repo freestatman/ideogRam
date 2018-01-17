@@ -7,12 +7,12 @@
 #' @export
 ideogRam <- function(data, message, width = NULL, height = NULL, elementId = NULL) {
 
-    if (is.null(elementId)) {
-        elementId <- paste0('ideogRam_', tempfile() %>% basename()) 
-        # avoid using - or ., which will make trouble for bind ID via: document.querySelector("body").innerHTML += container;
-    }
+    # if (is.null(elementId)) {
+    #     elementId <- paste0('ideogRam_', tempfile() %>% basename())
+    #     # avoid using - or ., which will make trouble for bind ID via: document.querySelector("body").innerHTML += container;
+    # }
 
-    data$container = paste0('#', elementId)
+    # data$container = paste0('#', elementId)
 
     # forward options using x
     x = list(

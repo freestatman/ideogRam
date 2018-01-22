@@ -19,6 +19,11 @@ HTMLWidgets.widget({
               console.log("render");
               console.log(x);
 
+              // Remove the old one
+              // TODO: better approach ?
+              for (var i = 0; i < el.childNodes.length; i++)
+                  el.removeChild(el.childNodes[i]);
+
               // Refer to the shared variable above
               ideogram = new Ideogram(x.data);
 

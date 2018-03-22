@@ -5,7 +5,7 @@
 #' @import htmlwidgets
 #'
 #' @export
-ideogRam <- function(data, message, width = NULL, height = NULL, elementId = NULL) {
+ideogRam <- function(data, width = NULL, height = NULL, elementId = NULL) {
 
     # if (is.null(elementId)) {
     #     elementId <- paste0('ideogRam_', tempfile() %>% basename())
@@ -15,10 +15,7 @@ ideogRam <- function(data, message, width = NULL, height = NULL, elementId = NUL
     # data$container = paste0('#', elementId)
 
     # forward options using x
-    x = list(
-             data = htmlwidgets:::toJSON(data),
-             message = message
-             )
+    x = list(data = htmlwidgets:::toJSON(data))
 
     # create widget
     htmlwidgets::createWidget(

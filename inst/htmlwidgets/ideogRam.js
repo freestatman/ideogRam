@@ -16,8 +16,19 @@ HTMLWidgets.widget({
               // Overwrite the option of container id
               x.data.container = "#" + el.id;
 
-              console.log("render");
-              console.log(x);
+              // Send the selected region from JS to R
+              x.data.onBrushMove = function () {
+                console.log("on Brush Move, ideogram.selectedRegion:", ideogram.selectedRegion);
+                // Only intended to use in shiny
+                if (!HTMLWidgets.shinyMode)
+                    return;
+                // ideogram is the shared variable
+                Shiny.onInputChange(el.id + "_brushrange", ideogram.selectedRegion);
+                console.log("Shiny on Input change ideogram.selectedRegion:", ideogram.selectedRegion);
+              };
+              x.data.onLoad = x.data.onBrushMove;
+
+              console.log("renderValue", x);
 
               // Remove the old one
               // TODO: better approach ?
@@ -37,8 +48,7 @@ HTMLWidgets.widget({
 
               // TODO: code to re-render the widget with a new size
               // forward resize on to sigma renderers
-              console.log("resize");
-              console.log(ideogram);
+              console.log("resize", ideogram);
 
               for (var name in ideogram.renderers)
                   ideogram.renderers[name].resize(width, height);

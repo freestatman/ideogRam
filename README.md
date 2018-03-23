@@ -4,11 +4,11 @@ ideogRam is an R htmlwidget wrapper package for Eric Weitz's ideogram.js [https:
 
 ## Install
 
-devtools::install_github("wangtulao/ideogRam")
+devtools::install_github("freestatman/ideogRam")
 
 ## Example
 
-See [example/ideogRam_examples.R](https://github.com/wangtulao/ideogRam/blob/master/example/ideogRam_examples.R) for some basic examples. more documentation is on the way...
+See [example/ideogRam_examples.R](https://github.com/freestatman/ideogRam/blob/master/example/ideogRam_examples.R) for some basic examples. more documentation is on the way...
 
 ## TODO
 * Link container id

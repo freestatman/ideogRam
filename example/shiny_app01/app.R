@@ -40,7 +40,8 @@ ui <- shinyUI(fluidPage(
     titlePanel("Hello IdeogRam!"),
     sidebarPanel(
         width = 2,
-        numericInput("chr", "Chromosome:", 4, min = 1, max = 26)
+        numericInput("chr", "Chromosome:", 4, min = 1, max = 26),
+        tags$a(href = 'https://github.com/freestatman/ideogRam/blob/master/example/shiny_app01/app.R', 'View on GitHub')
     ),
     mainPanel(
         ideogRamOutput("ideo_01"),
@@ -48,7 +49,7 @@ ui <- shinyUI(fluidPage(
     )
 ))
 
-runApp(list(ui = ui, server = server))
+shinyApp(ui = ui, server = server)
 
 
 

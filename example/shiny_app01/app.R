@@ -9,10 +9,10 @@ server <- function(input, output) {
             chromosome = as.character(input$chr),
             annotations = list(
                 list(
-                    name = "xxx",
+                    name = "CLRN2", #17,516,788-17,528,727
                     chr = "4",
-                    start = 34294,
-                    stop = 125482
+                    start = 17516788,
+                    stop = 17528727
                 ),
                 list(
                     name = "BRCA1",

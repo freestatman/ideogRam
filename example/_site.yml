@@ -1,0 +1,9 @@
+name: "ideogRam-examples"
+navbar:
+  title: "ideogRam Examples"
+  left:
+    - text: "Menu"
+      menu:
+        - text: "Example 1"
+          href: ideogRam_examples.html
+

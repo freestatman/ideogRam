@@ -1,0 +1,35 @@
+---
+title: "Example 1"
+output: html_document
+---
+
+## Example 1
+
+```{r}
+library(ideogRam)
+```
+
+
+```{r}
+ideo_01_config <- list(
+    organism = "human",
+    orientation = "horizontal",
+    annotations = list(
+        list(
+            name = "xxx",
+            chr = "2",
+            start = 34294,
+            stop = 125482
+        ),
+        list(
+            name = "BRCA1",
+            chr = "17",
+            start = 43125400,
+            stop = 43125482
+        )
+    )
+)
+p <- ideogRam(ideo_01_config)
+p
+```
+

@@ -5,5 +5,11 @@ navbar:
     - text: "Menu"
       menu:
         - text: "Example 1"
-          href: ideogRam_examples.html
+          href: example1.html
+        - text: "Example 2"
+          href: example2.html
+        - text: "Example 3"
+          href: example3.html
+        - text: "Example 4"
+          href: example4.html
 

@@ -1,0 +1,27 @@
+---
+title: "Example 3"
+output: html_document
+---
+
+## Example 3
+
+```{r}
+library(ideogRam)
+```
+
+Test native url input for annotationsPath: e.g. 
+https://unpkg.com/ideogram@0.9.0/dist/data/annotations/10_virtual_cnvs.json
+
+See https://github.com/eweitz/ideogram/issues/78
+
+```{r}
+ideo_03_config <- list(
+    organism = "human",
+    annotationsPath = "https://unpkg.com/ideogram@0.9.0/dist/data/annotations/10_virtual_cnvs.json",
+    annotationsLayout = "overlay"
+)
+
+p <- ideogRam(data = ideo_03_config)
+p
+```
+

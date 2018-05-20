@@ -1,0 +1,31 @@
+---
+title: "Example 2"
+output: html_document
+---
+
+## Example 2
+
+```{r}
+library(ideogRam)
+```
+
+
+```{r}
+annotationTracks <- list(
+    list("id" = "pathogenicTrack", "displayName" = "Pathogenic", "color" = "#F00"),
+    list("id" = "uncertainSignificanceTrack", "displayName" = "Uncertain significance", "color" = "#CCC"),
+    list("id" = "benignTrack", "displayName" = "Benign", "color" = "#8D4")
+)
+
+ideo_02_config <- list(
+    organism = "human",
+    orientation = "horizontal",
+    chrWidth = 8,
+    annotationsPath = "/annotations_tracks_files/Ideogram-0.9.0/data/annotations/1000_virtual_snvs.json",
+    annotationTracks = annotationTracks
+)
+
+p <- ideogRam(ideo_02_config)
+p
+```
+

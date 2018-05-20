@@ -1,0 +1,7 @@
+dependencies:
+  - name: ideogram
+    version: 0.14.0
+    src: htmlwidgets/lib/ideogram
+    stylesheet: ideogram.css # Question: where is the css file from?
+    script: 
+      - js/ideogram.min.js

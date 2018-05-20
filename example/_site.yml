@@ -1,4 +1,5 @@
 name: "ideogRam-examples"
+output_dir: "../doc"
 navbar:
   title: "ideogRam Examples"
   left:

@@ -1,0 +1,6 @@
+---
+title: "Examples of ideogRam"
+output: html_document
+---
+
+Here are some examples of ideogRam package.

@@ -4,7 +4,7 @@
 \alias{ideogRam}
 \title{<Add Title>}
 \usage{
-ideogRam(data, width = NULL, height = NULL, elementId = NULL)
+ideogRam(..., width = NULL, height = NULL, elementId = NULL)
 }
 \description{
 <Add Description>

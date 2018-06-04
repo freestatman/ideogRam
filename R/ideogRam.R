@@ -1,3 +1,11 @@
+
+#' @importFrom magrittr %>%
+#' @export
+magrittr::`%>%`
+
+#' @import GenomicRanges
+NULL
+
 #' <Add Title>
 #'
 #' <Add Description>
@@ -5,27 +13,109 @@
 #' @import htmlwidgets
 #'
 #' @export
-ideogRam <- function(data, width = NULL, height = NULL, elementId = NULL) {
-
-    # if (is.null(elementId)) {
-    #     elementId <- paste0('ideogRam_', tempfile() %>% basename())
-    #     # avoid using - or ., which will make trouble for bind ID via: document.querySelector("body").innerHTML += container;
-    # }
-
-    # data$container = paste0('#', elementId)
-
-    # forward options using x
-    x = list(data = htmlwidgets:::toJSON(data))
+ideogRam <- function(..., width = NULL, height = NULL, elementId = NULL) {
 
     # create widget
-    htmlwidgets::createWidget(
+    ans <- htmlwidgets::createWidget(
                               name = 'ideogRam',
-                              x,
+                              ## Initially it is NULL, but before rendering,
+                              ## x will be modified by the "compile_ideogram" function
+                              x = NULL,
                               width = width,
                               height = height,
                               package = 'ideogRam',
-                              elementId = elementId
+                              elementId = elementId,
+                              preRenderHook = compile_ideogram
                               )
+
+    # Store the options to attributes
+    ideoraw(ans) <- list(
+        options = list(...),
+        tracks = list()
+    )
+
+    ans
+}
+
+## The structure of ideogram class currently is like the following:
+##   - attr("ideoraw")
+##      - options: a list of options
+##      - tracks: a list of GRanges
+
+# Function that runs before rendering
+compile_ideogram <- function(widget) {
+    # Extract options and tracks
+    options <- ideoraw(widget)$options
+    tracks  <- ideoraw(widget)$tracks
+
+    # Check tracks is a list of GRanges
+    # TODO: check organisms, seqlevels, etc.
+    local({
+        stopifnot(is.list(tracks))
+        for (i in seq_along(tracks)) {
+            stopifnot(is(tracks[[i]], "GRanges"))
+        }
+    })
+
+    x <- list()
+    # Pass options
+    x$data <- options
+
+    # Convert tracks
+    # From the documentation:
+    #   Each annotation object has at least a chromosome name (chr), start coordinate (start),
+    #   and stop coordinate (stop).
+    #   Annotation objects can also have a name, color, shape, and track index.
+    if (length(tracks)) {
+        x$data$annotations <- local({
+            stopifnot(is.null(names(tracks)))
+
+            # Merge the GRanges
+            merged.tracks <- do.call(c, tracks)
+            df <- as.data.frame(merged.tracks) %>%
+                dplyr::rename(chr = seqnames, stop = end) %>%
+                dplyr::select(- width, - strand)
+
+            df
+        })
+    }
+
+    # Overwrite x, options should be auto_unbox, but tracks should not?
+    x$data <- jsonlite::toJSON(x$data, auto_unbox = TRUE)
+    widget$x <- x
+    widget
+}
+
+
+ideoraw <- function(ideo) {
+    attr(ideo, "ideoraw")
+}
+
+`ideoraw<-` <- function(ideo, value) {
+    attr(ideo, "ideoraw") <- value
+    ideo
+}
+
+#' @export
+add_track <- function(ideo, ...) {
+    stopifnot(inherits(ideo, "htmlwidget"))
+
+    dots <- list(...)
+    stopifnot(all(sapply(dots, function(x) is(x, "GRanges"))))
+
+    ideoraw(ideo)$tracks <- c(ideoraw(ideo)$tracks, dots)
+    ideo
+}
+
+#' @export
+set_option <- function(ideo, ...) {
+    stopifnot(inherits(ideo, "htmlwidget"))
+
+    dots <- list(...)
+
+    ideoraw(ideo)$options[names(dots)] <- dots
+
+    ideo
 }
 
 

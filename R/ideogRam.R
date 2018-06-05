@@ -13,6 +13,14 @@ NULL
 #' @import htmlwidgets
 #'
 #' @export
+#' @example
+#' data <- GRanges(c("2", "17"),
+#'                 IRanges(c(34294, 43125400), c(125482, 43125482)), color = c("red", "green"))
+#'
+#' p <- ideogRam(organism = "human") %>%
+#'     set_option(orientation = "horizontal") %>%
+#'     add_track(data)
+#' p
 ideogRam <- function(..., width = NULL, height = NULL, elementId = NULL) {
 
     # create widget

@@ -7,29 +7,18 @@ output: html_document
 
 ```{r}
 library(ideogRam)
+library(GenomicRanges)
 ```
 
 
 ```{r}
-ideo_01_config <- list(
-    organism = "human",
-    orientation = "horizontal",
-    annotations = list(
-        list(
-            name = "xxx",
-            chr = "2",
-            start = 34294,
-            stop = 125482
-        ),
-        list(
-            name = "BRCA1",
-            chr = "17",
-            start = 43125400,
-            stop = 43125482
-        )
-    )
-)
-p <- ideogRam(ideo_01_config)
+data <- GRanges(c("2", "17"),
+                IRanges(c(34294, 43125400), c(125482, 43125482)), color = c("red", "green"))
+
+p <- ideogRam(organism = "human") %>%
+    set_option(orientation = "horizontal") %>%
+    add_track(data)
+# unclass(ideogRam:::compile_ideogram(p))$x$data %>% jsonlite::prettify()
 p
 ```
 

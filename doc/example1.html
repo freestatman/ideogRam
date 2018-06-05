@@ -221,29 +221,49 @@ $(document).ready(function () {
 
 <div id="example-1" class="section level2">
 <h2>Example 1</h2>
-<pre class="r"><code>library(ideogRam)</code></pre>
-<pre class="r"><code>ideo_01_config &lt;- list(
-    organism = &quot;human&quot;,
-    orientation = &quot;horizontal&quot;,
-    annotations = list(
-        list(
-            name = &quot;xxx&quot;,
-            chr = &quot;2&quot;,
-            start = 34294,
-            stop = 125482
-        ),
-        list(
-            name = &quot;BRCA1&quot;,
-            chr = &quot;17&quot;,
-            start = 43125400,
-            stop = 43125482
-        )
-    )
-)
-p &lt;- ideogRam(ideo_01_config)
+<pre class="r"><code>library(ideogRam)
+library(GenomicRanges)</code></pre>
+<pre><code>## Loading required package: stats4</code></pre>
+<pre><code>## Loading required package: BiocGenerics</code></pre>
+<pre><code>## Loading required package: parallel</code></pre>
+<pre><code>## 
+## Attaching package: &#39;BiocGenerics&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:parallel&#39;:
+## 
+##     clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+##     clusterExport, clusterMap, parApply, parCapply, parLapply,
+##     parLapplyLB, parRapply, parSapply, parSapplyLB</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     IQR, mad, sd, var, xtabs</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     anyDuplicated, append, as.data.frame, basename, cbind,
+##     colMeans, colnames, colSums, dirname, do.call, duplicated,
+##     eval, evalq, Filter, Find, get, grep, grepl, intersect,
+##     is.unsorted, lapply, lengths, Map, mapply, match, mget, order,
+##     paste, pmax, pmax.int, pmin, pmin.int, Position, rank, rbind,
+##     Reduce, rowMeans, rownames, rowSums, sapply, setdiff, sort,
+##     table, tapply, union, unique, unsplit, which, which.max,
+##     which.min</code></pre>
+<pre><code>## Loading required package: S4Vectors</code></pre>
+<pre><code>## 
+## Attaching package: &#39;S4Vectors&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:base&#39;:
+## 
+##     expand.grid</code></pre>
+<pre><code>## Loading required package: IRanges</code></pre>
+<pre><code>## Loading required package: GenomeInfoDb</code></pre>
+<pre class="r"><code>data &lt;- GRanges(c(&quot;2&quot;, &quot;17&quot;),
+                IRanges(c(34294, 43125400), c(125482, 43125482)), color = c(&quot;red&quot;, &quot;green&quot;))
+
+p &lt;- ideogRam(organism = &quot;human&quot;) %&gt;%
+    set_option(orientation = &quot;horizontal&quot;) %&gt;%
+    add_track(data)
+# unclass(ideogRam:::compile_ideogram(p))$x$data %&gt;% jsonlite::prettify()
 p</code></pre>
-<div id="htmlwidget-d451f6ca6c7b34f58a6f" style="width:672px;height:480px;" class="ideogRam html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d451f6ca6c7b34f58a6f">{"x":{"data":{"organism":"human","orientation":"horizontal","annotations":[{"name":"xxx","chr":"2","start":34294,"stop":125482},{"name":"BRCA1","chr":"17","start":43125400,"stop":43125482}]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-84b75208cf95367423a3" style="width:672px;height:480px;" class="ideogRam html-widget"></div>
+<script type="application/json" data-for="htmlwidget-84b75208cf95367423a3">{"x":{"data":{"organism":"human","orientation":"horizontal","annotations":[{"chr":"2","start":34294,"stop":125482,"color":"red"},{"chr":"17","start":43125400,"stop":43125482,"color":"green"}]}},"evals":[],"jsHooks":[]}</script>
 </div>
 
 

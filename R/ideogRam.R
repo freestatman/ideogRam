@@ -106,7 +106,7 @@ ideoraw <- function(ideo) {
 
 #' @export
 add_track <- function(ideo, ...) {
-    stopifnot(inherits(ideo, "htmlwidget"))
+    stopifnot(inherits(ideo, "ideogRam"))
 
     dots <- list(...)
     stopifnot(all(sapply(dots, function(x) is(x, "GRanges"))))
@@ -117,7 +117,7 @@ add_track <- function(ideo, ...) {
 
 #' @export
 set_option <- function(ideo, ...) {
-    stopifnot(inherits(ideo, "htmlwidget"))
+    stopifnot(inherits(ideo, "ideogRam"))
 
     dots <- list(...)
 

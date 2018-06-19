@@ -23,6 +23,13 @@ NULL
 #' p
 ideogRam <- function(..., width = NULL, height = NULL, elementId = NULL) {
 
+    sizepolicy <- htmlwidgets::sizingPolicy(
+        browser.fill = TRUE,
+        knitr.figure = FALSE,
+        knitr.defaultWidth = "100%",
+        knitr.defaultHeight = "auto"
+    )
+
     # create widget
     ans <- htmlwidgets::createWidget(
                               name = 'ideogRam',
@@ -31,6 +38,7 @@ ideogRam <- function(..., width = NULL, height = NULL, elementId = NULL) {
                               x = NULL,
                               width = width,
                               height = height,
+                              sizingPolicy = sizepolicy,
                               package = 'ideogRam',
                               elementId = elementId,
                               preRenderHook = compile_ideogram

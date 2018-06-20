@@ -128,6 +128,8 @@ set_option <- function(ideo, ...) {
     stopifnot(inherits(ideo, "ideogRam"))
 
     dots <- list(...)
+    if (is.null(names(dots)) || any(names(dots) == ""))
+        stop("Options must be named")
 
     ideoraw(ideo)$options[names(dots)] <- dots
 

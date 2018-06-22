@@ -133,6 +133,9 @@ set_option <- function(ideo, ...) {
 
     ideoraw(ideo)$options[names(dots)] <- dots
 
+    # Validate the options
+    ideo_validate(ideo)
+
     ideo
 }
 

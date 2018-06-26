@@ -1,24 +1,91 @@
 ---
-title: "Example 1"
+title: "Basic Examples"
 output: html_document
 ---
-
-## Example 1
 
 ```{r}
 library(ideogRam)
 library(GenomicRanges)
 ```
 
+## Human
+
+A human genome is depicted below. The grey and black bands in each chromosome represent heterochromatin. The pink region is the area around the centromere, and the blue represents variable regions. 
 
 ```{r}
-data <- GRanges(c("2", "17"),
-                IRanges(c(34294, 43125400), c(125482, 43125482)), color = c("red", "green"))
+ideogRam(organism = "human", chrHeight = 500)
+```
 
-p <- ideogRam(organism = "human") %>%
-    set_option(orientation = "horizontal") %>%
-    add_track(data)
-# unclass(ideogRam:::compile_ideogram(p))$x$data %>% jsonlite::prettify()
-p
+## Mouse
+
+```{r}
+ideogRam(
+    organism = "mouse",
+    orientation = "horizontal",
+    showBandLabels = TRUE,
+    chrHeight = 300
+)
+```
+
+## Annotations, basic
+
+The location of BRCA1 is depicted here in red.
+
+```{r}
+brca1 <- GRanges('17', IRanges(43044294, 43125482), name = "BRCA1")
+# This seems a bug, as it shows chromosomes 1, 7 and 17.
+ideogRam(organism = "human") %>%
+    set_option(chromosomes = '17', chrHeight = 600, orientation = "horizontal") %>%
+    set_option(showAnnotTooltip = TRUE) %>%
+    add_track(brca1)
+```
+
+## Annotations, overlaid
+
+Large-scale structural variations (SVs) can be depicted using colored overlays, as seen below.
+
+```{r}
+ten_virtual_cnvs <- ideogRam:::sample_10_virtual_cnvs()
+ten_virtual_cnvs
+ideogRam(organism = "human") %>%
+    set_option(chrHeight = 300, chrMargin = 2, annotationsLayout = "overlay",
+               orientation = "horizontal") %>%
+    add_track(ten_virtual_cnvs)
+```
+
+## Annotations, tracks
+
+
+## Layout, small
+
+
+```{r}
+ideogRam(organism = "human", orientation = "vertical", rows = 2) %>%
+    set_option(resolution = 550, chrHeight = 150, rotatable = FALSE)
+```
+
+## Brush
+
+```{r}
+ideogRam(
+    organism = "human",
+    chromosome = "1",
+    resolution = 550,
+    chrHeight = 600,
+    orientation = "horizontal",
+    brush = TRUE  ## In the new version, we need to give a string
+)
+```
+
+## Ploidy, basic
+
+```{r}
+ideogRam(
+    organism = "human",
+    sex = "female",
+    chrHeight = 300,
+    chrWidth = 8,
+    ploidy = 2
+)
 ```
 

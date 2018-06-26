@@ -217,3 +217,57 @@ renderIdeogRam <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
   htmlwidgets::shinyRenderWidget(expr, ideogRamOutput, env, quoted = TRUE)
 }
+
+
+## Util functions
+
+debug_ideo <- function(ideo) {
+    unclass(compile_ideogram(ideo))$x$data %>% jsonlite::prettify()
+}
+
+
+sample_10_virtual_cnvs <- function() {
+    path <- system.file("htmlwidgets/lib/ideogram/data/annotations", "10_virtual_cnvs.json",
+                        package = "ideogRam", mustWork = TRUE)
+    data <- jsonlite::fromJSON(path)
+    annots <- data$annots
+
+    seqnames <- rep(annots$chr, sapply(annots$annots, function(df) {
+        if (is.list(df) && length(df) == 0)
+            return(0)
+        else
+            return(nrow(df))
+    }))
+    seqnames
+    start <- unlist(lapply(annots$annots, function(df) {
+        if (is.list(df) && length(df) == 0)
+            return(numeric())
+        else
+            return(as.numeric(df[,2]))
+    }))
+    width <- unlist(lapply(annots$annots, function(df) {
+        if (is.list(df) && length(df) == 0)
+            return(numeric())
+        else
+            return(as.numeric(df[,3]))
+    }))
+    name <- unlist(lapply(annots$annots, function(df) {
+        if (is.list(df) && length(df) == 0)
+            return(character())
+        else
+            return(df[,1])
+    }))
+    color <- unlist(lapply(annots$annots, function(df) {
+        if (is.list(df) && length(df) == 0)
+            return(character())
+        else
+            return(df[,4])
+    }))
+    ans <- data.frame(seqnames = seqnames, start = start, width = width,
+                      name = name, color = color, stringsAsFactors = FALSE)
+    with(ans, GRanges(seqnames, IRanges(start = start, width = width),
+                      name = name, color = color))
+}
+
+if (FALSE)
+    sample_10_virtual_cnvs()

@@ -11,7 +11,7 @@
 
 
 
-<title>Example 1</title>
+<title>Basic Examples</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -93,6 +93,9 @@ img {
 }
 .tabbed-pane {
   padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
 }
 button.code-folding-btn:focus {
   outline: none;
@@ -214,56 +217,116 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Example 1</h1>
+<h1 class="title toc-ignore">Basic Examples</h1>
 
 </div>
 
 
-<div id="example-1" class="section level2">
-<h2>Example 1</h2>
 <pre class="r"><code>library(ideogRam)
 library(GenomicRanges)</code></pre>
-<pre><code>## Loading required package: stats4</code></pre>
-<pre><code>## Loading required package: BiocGenerics</code></pre>
-<pre><code>## Loading required package: parallel</code></pre>
-<pre><code>## 
-## Attaching package: &#39;BiocGenerics&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:parallel&#39;:
-## 
-##     clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
-##     clusterExport, clusterMap, parApply, parCapply, parLapply,
-##     parLapplyLB, parRapply, parSapply, parSapplyLB</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     IQR, mad, sd, var, xtabs</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     anyDuplicated, append, as.data.frame, basename, cbind,
-##     colMeans, colnames, colSums, dirname, do.call, duplicated,
-##     eval, evalq, Filter, Find, get, grep, grepl, intersect,
-##     is.unsorted, lapply, lengths, Map, mapply, match, mget, order,
-##     paste, pmax, pmax.int, pmin, pmin.int, Position, rank, rbind,
-##     Reduce, rowMeans, rownames, rowSums, sapply, setdiff, sort,
-##     table, tapply, union, unique, unsplit, which, which.max,
-##     which.min</code></pre>
-<pre><code>## Loading required package: S4Vectors</code></pre>
-<pre><code>## 
-## Attaching package: &#39;S4Vectors&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:base&#39;:
-## 
-##     expand.grid</code></pre>
-<pre><code>## Loading required package: IRanges</code></pre>
-<pre><code>## Loading required package: GenomeInfoDb</code></pre>
-<pre class="r"><code>data &lt;- GRanges(c(&quot;2&quot;, &quot;17&quot;),
-                IRanges(c(34294, 43125400), c(125482, 43125482)), color = c(&quot;red&quot;, &quot;green&quot;))
-
-p &lt;- ideogRam(organism = &quot;human&quot;) %&gt;%
-    set_option(orientation = &quot;horizontal&quot;) %&gt;%
-    add_track(data)
-# unclass(ideogRam:::compile_ideogram(p))$x$data %&gt;% jsonlite::prettify()
-p</code></pre>
-<div id="htmlwidget-84b75208cf95367423a3" style="width:672px;height:480px;" class="ideogRam html-widget"></div>
-<script type="application/json" data-for="htmlwidget-84b75208cf95367423a3">{"x":{"data":{"organism":"human","orientation":"horizontal","annotations":[{"chr":"2","start":34294,"stop":125482,"color":"red"},{"chr":"17","start":43125400,"stop":43125482,"color":"green"}]}},"evals":[],"jsHooks":[]}</script>
+<div id="human" class="section level2">
+<h2>Human</h2>
+<p>A human genome is depicted below. The grey and black bands in each chromosome represent heterochromatin. The pink region is the area around the centromere, and the blue represents variable regions.</p>
+<pre class="r"><code>ideogRam(organism = &quot;human&quot;, chrHeight = 500)</code></pre>
+<div id="htmlwidget-e801a55c73a46f4ac789" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e801a55c73a46f4ac789">{"x":{"data":{"organism":"human","chrHeight":500}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="mouse" class="section level2">
+<h2>Mouse</h2>
+<pre class="r"><code>ideogRam(
+    organism = &quot;mouse&quot;,
+    orientation = &quot;horizontal&quot;,
+    showBandLabels = TRUE,
+    chrHeight = 300
+)</code></pre>
+<div id="htmlwidget-29dd5ec5207c30d8f13d" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
+<script type="application/json" data-for="htmlwidget-29dd5ec5207c30d8f13d">{"x":{"data":{"organism":"mouse","orientation":"horizontal","showBandLabels":true,"chrHeight":300}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="annotations-basic" class="section level2">
+<h2>Annotations, basic</h2>
+<p>The location of BRCA1 is depicted here in red.</p>
+<pre class="r"><code>brca1 &lt;- GRanges(&#39;17&#39;, IRanges(43044294, 43125482), name = &quot;BRCA1&quot;)
+# This seems a bug, as it shows chromosomes 1, 7 and 17.
+ideogRam(organism = &quot;human&quot;) %&gt;%
+    set_option(chromosomes = &#39;17&#39;, chrHeight = 600, orientation = &quot;horizontal&quot;) %&gt;%
+    set_option(showAnnotTooltip = TRUE) %&gt;%
+    add_track(brca1)</code></pre>
+<div id="htmlwidget-f77a40db40ce12fb794e" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f77a40db40ce12fb794e">{"x":{"data":{"organism":"human","chromosomes":"17","chrHeight":600,"orientation":"horizontal","showAnnotTooltip":true,"annotations":[{"chr":"17","start":43044294,"stop":43125482,"name":"BRCA1"}]}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="annotations-overlaid" class="section level2">
+<h2>Annotations, overlaid</h2>
+<p>Large-scale structural variations (SVs) can be depicted using colored overlays, as seen below.</p>
+<pre class="r"><code>ten_virtual_cnvs &lt;- ideogRam:::sample_10_virtual_cnvs()
+ten_virtual_cnvs</code></pre>
+<pre><code>## GRanges object with 10 ranges and 2 metadata columns:
+##        seqnames              ranges strand |             name
+##           &lt;Rle&gt;           &lt;IRanges&gt;  &lt;Rle&gt; |      &lt;character&gt;
+##    [1]        1   30000000-35999999      * |         virtual1
+##    [2]        1   40000000-44999999      * |         virtual2
+##    [3]        2   40738282-57863820      * |        nsv531656
+##    [4]        2   30000000-38999999      * |                2
+##    [5]       20   30954171-30959986      * |    observation 1
+##    [6]        3   30000000-38999999      * |                 
+##    [7]        3   33000000-35999999      * |         virtual3
+##    [8]        9 120000000-128999999      * | a duplicate name
+##    [9]        9   12000000-23999999      * | a duplicate name
+##   [10]        X   47422351-47429070      * |    observation 2
+##                        color
+##                  &lt;character&gt;
+##    [1] rgba(255, 0, 0, 0.65)
+##    [2] rgba(0, 255, 0, 0.65)
+##    [3] rgba(255, 0, 0, 0.65)
+##    [4] rgba(255, 0, 0, 0.65)
+##    [5] rgba(255, 0, 0, 0.65)
+##    [6] rgba(0, 255, 0, 0.65)
+##    [7] rgba(255, 0, 0, 0.65)
+##    [8] rgba(0, 255, 0, 0.65)
+##    [9] rgba(255, 0, 0, 0.65)
+##   [10] rgba(0, 0, 255, 0.65)
+##   -------
+##   seqinfo: 6 sequences from an unspecified genome; no seqlengths</code></pre>
+<pre class="r"><code>ideogRam(organism = &quot;human&quot;) %&gt;%
+    set_option(chrHeight = 300, chrMargin = 2, annotationsLayout = &quot;overlay&quot;,
+               orientation = &quot;horizontal&quot;) %&gt;%
+    add_track(ten_virtual_cnvs)</code></pre>
+<div id="htmlwidget-d2e3c5d7bd1c2efac027" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d2e3c5d7bd1c2efac027">{"x":{"data":{"organism":"human","chrHeight":300,"chrMargin":2,"annotationsLayout":"overlay","orientation":"horizontal","annotations":[{"chr":"1","start":30000000,"stop":35999999,"name":"virtual1","color":"rgba(255, 0, 0, 0.65)"},{"chr":"1","start":40000000,"stop":44999999,"name":"virtual2","color":"rgba(0, 255, 0, 0.65)"},{"chr":"2","start":40738282,"stop":57863820,"name":"nsv531656","color":"rgba(255, 0, 0, 0.65)"},{"chr":"2","start":30000000,"stop":38999999,"name":"2","color":"rgba(255, 0, 0, 0.65)"},{"chr":"20","start":30954171,"stop":30959986,"name":"observation 1","color":"rgba(255, 0, 0, 0.65)"},{"chr":"3","start":30000000,"stop":38999999,"name":" ","color":"rgba(0, 255, 0, 0.65)"},{"chr":"3","start":33000000,"stop":35999999,"name":"virtual3","color":"rgba(255, 0, 0, 0.65)"},{"chr":"9","start":120000000,"stop":128999999,"name":"a duplicate name","color":"rgba(0, 255, 0, 0.65)"},{"chr":"9","start":12000000,"stop":23999999,"name":"a duplicate name","color":"rgba(255, 0, 0, 0.65)"},{"chr":"X","start":47422351,"stop":47429070,"name":"observation 2","color":"rgba(0, 0, 255, 0.65)"}]}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="annotations-tracks" class="section level2">
+<h2>Annotations, tracks</h2>
+</div>
+<div id="layout-small" class="section level2">
+<h2>Layout, small</h2>
+<pre class="r"><code>ideogRam(organism = &quot;human&quot;, orientation = &quot;vertical&quot;, rows = 2) %&gt;%
+    set_option(resolution = 550, chrHeight = 150, rotatable = FALSE)</code></pre>
+<div id="htmlwidget-b9dbf2d94afec664ee78" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b9dbf2d94afec664ee78">{"x":{"data":{"organism":"human","orientation":"vertical","rows":2,"resolution":550,"chrHeight":150,"rotatable":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="brush" class="section level2">
+<h2>Brush</h2>
+<pre class="r"><code>ideogRam(
+    organism = &quot;human&quot;,
+    chromosome = &quot;1&quot;,
+    resolution = 550,
+    chrHeight = 600,
+    orientation = &quot;horizontal&quot;,
+    brush = TRUE  ## In the new version, we need to give a string
+)</code></pre>
+<div id="htmlwidget-d5a44ead6dd4a7699deb" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d5a44ead6dd4a7699deb">{"x":{"data":{"organism":"human","chromosome":"1","resolution":550,"chrHeight":600,"orientation":"horizontal","brush":true}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="ploidy-basic" class="section level2">
+<h2>Ploidy, basic</h2>
+<pre class="r"><code>ideogRam(
+    organism = &quot;human&quot;,
+    sex = &quot;female&quot;,
+    chrHeight = 300,
+    chrWidth = 8,
+    ploidy = 2
+)</code></pre>
+<div id="htmlwidget-9fdb10709ea2aa057733" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9fdb10709ea2aa057733">{"x":{"data":{"organism":"human","sex":"female","chrHeight":300,"chrWidth":8,"ploidy":2}},"evals":[],"jsHooks":[]}</script>
 </div>
 
 

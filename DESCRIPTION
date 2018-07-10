@@ -12,4 +12,5 @@ Imports: htmlwidgets, magrittr, GenomicRanges, dplyr, jsonlite
 RoxygenNote: 6.0.1
 Collate: 
     'ideogRam.R'
+    'ideogRam_mapping.R'
     'ideogRam_validate.R'

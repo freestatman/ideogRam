@@ -26,7 +26,9 @@ HTMLWidgets.widget({
                 Shiny.onInputChange(el.id + "_brushrange", ideogram.selectedRegion);
                 console.log("Shiny on Input change ideogram.selectedRegion:", ideogram.selectedRegion);
               };
-              x.data.onLoad = x.data.onBrushMove;
+
+              // FIXME: temporary disable it, we should compose with the existing callback
+              // x.data.onLoad = x.data.onBrushMove;
 
               console.log("renderValue", x);
 
@@ -37,6 +39,9 @@ HTMLWidgets.widget({
 
               // Refer to the shared variable above
               ideogram = new Ideogram(x.data);
+
+              // Add a global reference, for the sake of testing
+              window._myideogram = ideogram;
 
               // apply settings
               for (var name in x.settings)

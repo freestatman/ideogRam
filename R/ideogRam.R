@@ -97,7 +97,12 @@ compile_ideogram <- function(widget) {
     }
 
     # Overwrite x, options should be auto_unbox, but tracks should not?
-    x$data <- jsonlite::toJSON(x$data, auto_unbox = TRUE)
+    # x$data <- jsonlite::toJSON(x$data, auto_unbox = TRUE, force = TRUE,
+    #                            json_verbatim = TRUE)
+    attr(x, 'TOJSON_ARGS') <- list(
+        auto_unbox = TRUE, dataframe = "rows"
+    )
+
     widget$x <- x
     widget
 }

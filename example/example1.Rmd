@@ -89,3 +89,21 @@ ideogRam(
 )
 ```
 
+
+
+## Selected genes
+
+Some random selected genes from EnsDb
+
+```{r}
+library(EnsDb.Hsapiens.v75)
+set.seed(1)
+genes <- genes(EnsDb.Hsapiens.v75)
+genes <- genes[start(genes) < 40000000]
+genes <- genes[sample(seq(length(genes)), 100)]
+
+p <- ideogRam(organism = "human") %>%
+    set_option(orientation = "vertical", chrHeight = 300) %>%
+    add_track(genes)
+p
+```

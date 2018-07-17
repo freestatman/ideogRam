@@ -24,8 +24,7 @@ show_mapping <- function(ideo, from, to, color = "green", opacity = 0.5) {
     ))
 
     jscallback <- JS(sprintf('function() {
-        // FIXME: Just a hack
-        var ideogram = window._myideogram;
+        var ideogram = this;
 
         // ideogram is the shared variable of the widget
         // Find the chromosomes

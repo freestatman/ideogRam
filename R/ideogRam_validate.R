@@ -9,7 +9,7 @@ ideo_validate <- function(ideo) {
 }
 
 validate_opts <- function(ideo) {
-    opts <- ideoraw(ideo)$options
+    opts <- ideoraw(ideo)
 
     # It should be a list
     stopifnot(is.list(opts))
@@ -67,8 +67,7 @@ known_opts <- c(
 )
 
 noneed <- c(
-    "annotations"
-    ,"annotationsPath"
+    "annotationsPath"
     ,"container"
     ,"dataDir"
 )

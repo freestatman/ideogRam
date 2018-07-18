@@ -45,10 +45,7 @@ ideogRam <- function(..., width = NULL, height = NULL, elementId = NULL) {
                               )
 
     # Store the options to attributes
-    ideoraw(ans) <- list(
-        options = list(...),
-        tracks = list()
-    )
+    ideoraw(ans) <- list(...)
 
     ans
 }
@@ -60,45 +57,32 @@ ideogRam <- function(..., width = NULL, height = NULL, elementId = NULL) {
 
 # Function that runs before rendering
 compile_ideogram <- function(widget) {
-    # Extract options and tracks
-    options <- ideoraw(widget)$options
-    tracks  <- ideoraw(widget)$tracks
+    # Extract options
+    ideoraw <- ideoraw(widget)
 
-    # Check tracks is a list of GRanges
-    # TODO: check organisms, seqlevels, etc.
-    local({
-        stopifnot(is.list(tracks))
-        for (i in seq_along(tracks)) {
-            stopifnot(is(tracks[[i]], "GRanges"))
-        }
-    })
-
-    x <- list()
-    # Pass options
-    x$data <- options
-
-    # Convert tracks
+    ## Process annotations
     # From the documentation:
     #   Each annotation object has at least a chromosome name (chr), start coordinate (start),
     #   and stop coordinate (stop).
     #   Annotation objects can also have a name, color, shape, and track index.
-    if (length(tracks)) {
-        x$data$annotations <- local({
-            stopifnot(is.null(names(tracks)))
-
-            # Merge the GRanges
-            merged.tracks <- do.call(c, tracks)
-            df <- as.data.frame(merged.tracks) %>%
+    ideoraw$annotations <- local({
+        annotations <- ideoraw$annotations
+        for (i in seq_along(annotations))
+            stopifnot(is(annotations[[i]], "GRanges"))
+        if (length(annotations)) {
+            stopifnot(is.null(names(annotations)))
+            annotations <- do.call(c, annotations)
+            annotations <- as.data.frame(annotations) %>%
                 dplyr::rename(chr = seqnames, stop = end) %>%
                 dplyr::select(- width, - strand)
+        }
+        annotations
+    })
 
-            df
-        })
-    }
+    x <- list()
+    # Pass processed options
+    x$data <- ideoraw
 
-    # Overwrite x, options should be auto_unbox, but tracks should not?
-    # x$data <- jsonlite::toJSON(x$data, auto_unbox = TRUE, force = TRUE,
-    #                            json_verbatim = TRUE)
     attr(x, 'TOJSON_ARGS') <- list(
         auto_unbox = TRUE, dataframe = "rows"
     )
@@ -124,7 +108,7 @@ add_track <- function(ideo, ...) {
     dots <- list(...)
     stopifnot(all(sapply(dots, function(x) is(x, "GRanges"))))
 
-    ideoraw(ideo)$tracks <- c(ideoraw(ideo)$tracks, dots)
+    ideoraw(ideo)$annotations <- c(ideoraw(ideo)$annotations, dots)
     ideo
 }
 
@@ -136,7 +120,7 @@ set_option <- function(ideo, ...) {
     if (is.null(names(dots)) || any(names(dots) == ""))
         stop("Options must be named")
 
-    ideoraw(ideo)$options[names(dots)] <- dots
+    ideoraw(ideo)[names(dots)] <- dots
 
     # Validate the options
     ideo_validate(ideo)

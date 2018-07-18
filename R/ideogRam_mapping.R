@@ -1,7 +1,7 @@
 
 #' @export
 show_mapping <- function(ideo, from, to, color = "green", opacity = 0.5) {
-    ori.opts <- ideoraw(ideo)$options
+    ori.opts <- ideoraw(ideo)
     if (!is.null(ori.opts$onLoad)) {
         warning("onLoad option will be overided")
         # TODO: to combine the callbacks
@@ -58,7 +58,7 @@ show_mapping <- function(ideo, from, to, color = "green", opacity = 0.5) {
 
     }', chr.from, chr.to, json.from, json.to, color, as.numeric(opacity)))
 
-    ideoraw(ideo)$options$onLoad <- jscallback
+    ideoraw(ideo)$onLoad <- jscallback
     ideo
 }
 

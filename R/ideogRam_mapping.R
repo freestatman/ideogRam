@@ -14,51 +14,18 @@ show_mapping <- function(ideo, from, to, color = "green", opacity = 0.5) {
     stopifnot(length(chr.from) == 1)
     stopifnot(length(chr.to)   == 1)
 
-    json.from <- jsonlite::toJSON(data.frame(
-        start = start(from),
-        stop  = end(from)
-    ))
-    json.to   <- jsonlite::toJSON(data.frame(
-        start = start(to),
-        stop  = end(to)
-    ))
+    onLoad_DrawRegions <- data.frame(matrix(, nrow = length(from), ncol = 0))
+    onLoad_DrawRegions$r1 <- data.frame(
+        chr = chr.from, start = start(from), stop = end(from)
+    )
+    onLoad_DrawRegions$r2 <- data.frame(
+        chr = chr.to, start = start(to), stop = end(to)
+    )
+    onLoad_DrawRegions$color <- color
+    onLoad_DrawRegions$opacity <- opacity
 
-    jscallback <- JS(sprintf('function() {
-        var ideogram = this;
+    ideoraw(ideo)$onLoad_DrawRegions <- onLoad_DrawRegions
 
-        // ideogram is the shared variable of the widget
-        // Find the chromosomes
-        var chrs = ideogram.chromosomes;
-
-        // Currently assume there is only one organism
-        var organism = chrs[Object.keys(chrs)[0]];
-
-        var chrfrom = organism["%s"];
-        var chrto   = organism["%s"];
-
-        var jsonfrom = %s;
-        var jsonto   = %s;
-
-        var drawregions = [];
-        var each;
-
-        for (var i = 0; i < jsonfrom.length; i++) {
-            each = {
-                "r1": {chr: chrfrom, start: jsonfrom[i].start, stop: jsonfrom[i].stop},
-                "r2": {chr:   chrto, start:   jsonto[i].start, stop:   jsonto[i].stop},
-                "color": "%s",
-                "opacity": %s
-            }
-            drawregions.push(each);
-        }
-        console.log("Drawregions", drawregions);
-
-	    ideogram.drawSynteny(drawregions);
-
-
-    }', chr.from, chr.to, json.from, json.to, color, as.numeric(opacity)))
-
-    ideoraw(ideo)$onLoad <- jscallback
     ideo
 }
 

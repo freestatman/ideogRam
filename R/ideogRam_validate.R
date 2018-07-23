@@ -64,6 +64,8 @@ known_opts <- c(
     ,"showAnnotTooltip"
     ,"showFullyBanded"
     ,"showNonNuclearChromosomes"
+
+    ,"onLoad_DrawRegions"
 )
 
 noneed <- c(

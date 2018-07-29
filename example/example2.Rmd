@@ -23,3 +23,11 @@ ideo <- ideogRam(organism = "human", chromosomes = c("X", "Y"),
 ideo
 ```
 
+```{r}
+ideo %>%
+    set_option(chromosomes = c("X", "Y")) %>%
+    show_mapping(color = "green",
+        from = GRanges(c("X"), IRanges(c(20000000, 20000000), c(30000000, 30000000))),
+        to = GRanges(c("Y"), IRanges(c(10570133, 30010001), c(19603085, 32781479)))
+    )
+```

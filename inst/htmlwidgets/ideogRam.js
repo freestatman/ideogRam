@@ -20,20 +20,21 @@ HTMLWidgets.widget({
           for (var i = 0; i < data.length; i++) {
               regions.push({
                   r1: {
-                      chr: organism[data[i].r1.chr],
-                      start: data[i].r1.start,
-                      stop:  data[i].r1.stop
+                      chr: organism[data[i].r1_chr],
+                      start: data[i].r1_start,
+                      stop:  data[i].r1_stop
                   },
                   r2: {
-                      chr: organism[data[i].r2.chr],
-                      start: data[i].r2.start,
-                      stop:  data[i].r2.stop
+                      chr: organism[data[i].r2_chr],
+                      start: data[i].r2_start,
+                      stop:  data[i].r2_stop
                   },
                   color: data[i].color,
                   opacity: data[i].opacity
               });
           }
 
+          console.log("Draw regions", regions);
           ideo.drawSynteny(regions);
       };
 

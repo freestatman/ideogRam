@@ -15,3 +15,10 @@ Run the following R code to build the example website to "doc" directory:
 ```r
 rmarkdown::render_site("example")
 ```
+
+You can also see a shiny application example with
+
+```r
+example("ideogRam-shiny")
+```
+

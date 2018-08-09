@@ -66,7 +66,7 @@ compile_ideogram <- function(widget) {
     #   and stop coordinate (stop).
     #   Annotation objects can also have a name, color, shape, and track index.
     ideoraw$annotations <- local({
-        annotations <- ideoraw$annotations
+        annotations <- ideoraw[['annotations']]
         for (i in seq_along(annotations))
             stopifnot(is(annotations[[i]], "GRanges"))
         if (length(annotations)) {

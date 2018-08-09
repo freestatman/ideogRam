@@ -108,7 +108,7 @@ add_track <- function(ideo, ...) {
     dots <- list(...)
     stopifnot(all(sapply(dots, function(x) is(x, "GRanges"))))
 
-    ideoraw(ideo)$annotations <- c(ideoraw(ideo)$annotations, dots)
+    ideoraw(ideo)$annotations <- c(ideoraw(ideo)[['annotations']], dots)
     ideo
 }
 

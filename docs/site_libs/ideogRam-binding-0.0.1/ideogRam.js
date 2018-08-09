@@ -5,6 +5,38 @@ HTMLWidgets.widget({
   type: 'output',
 
   factory: function(el, width, height) {
+      // Util function to draw mappings
+      var drawRegions = function(ideo) {
+          // The data are stored in the config
+          var data = ideo.config.onLoad_DrawRegions;
+          // Find the chromosomes
+          var chrs = ideogram.chromosomes;
+          // Currently assume there is only one organism
+          var organism = chrs[Object.keys(chrs)[0]];
+
+          if (!data) return;
+
+          var regions = [];
+          for (var i = 0; i < data.length; i++) {
+              regions.push({
+                  r1: {
+                      chr: organism[data[i].r1_chr],
+                      start: data[i].r1_start,
+                      stop:  data[i].r1_stop
+                  },
+                  r2: {
+                      chr: organism[data[i].r2_chr],
+                      start: data[i].r2_start,
+                      stop:  data[i].r2_stop
+                  },
+                  color: data[i].color,
+                  opacity: data[i].opacity
+              });
+          }
+
+          console.log("Draw regions", regions);
+          ideo.drawSynteny(regions);
+      };
 
       // TODO: define shared variables for this instance
       var ideogram;
@@ -29,6 +61,16 @@ HTMLWidgets.widget({
 
               // FIXME: temporary disable it, we should compose with the existing callback
               // x.data.onLoad = x.data.onBrushMove;
+              x.data.onLoad = function() {
+                  // Refer the ideogram instance
+                  var ideo = ideogram;
+
+                  // Call onBrushMove
+                  x.data.onBrushMove();
+
+                  // Call drawRegions
+                  drawRegions(ideo);
+              };
 
               console.log("renderValue", x);
 

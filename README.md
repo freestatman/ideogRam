@@ -2,6 +2,8 @@
 
 ideogRam is an R htmlwidget wrapper package for Eric Weitz's ideogram.js [https://github.com/eweitz/ideogram].
 
+This package is written for the [R project in GSoC 2018](https://summerofcode.withgoogle.com/projects/#6554027051974656).
+
 ## Install
 
 devtools::install_github("freestatman/ideogRam")
@@ -22,3 +24,6 @@ You can also see a shiny application example with
 example("ideogRam-shiny")
 ```
 
+## Acknowledgement 
+
+Huge thanks to my mentors **Eric Weitz Jialin Ma** and **Freeman Wang** who helps me understand the nature of this project. 

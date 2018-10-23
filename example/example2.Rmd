@@ -1,0 +1,33 @@
+---
+title: "Mapping Ranges Between Chromosomes"
+output: html_document
+---
+
+```{r}
+library(GenomicRanges)
+library(ideogRam)
+```
+
+```{r}
+gr.from <- GRanges('X', IRanges(c(10001, 105701383), c(2781479, 116030895)))
+gr.to   <- GRanges('Y', IRanges(c(30010001, 6887903), c(32781479, 8217415)))
+ideo <- ideogRam(organism = "human", chromosomes = c("X", "Y"),
+                 chrHeight = 400, chrMargin = 200, rotatable = FALSE) %>%
+    # set_option(perspective = "comparative") %>%
+    show_mapping(from = gr.from,
+                 to   = gr.to,
+                 color = "yellow") %>%
+    add_track(gr.from) %>%
+    add_track(gr.to) %>%
+    set_option(annotationsLayout = "overlay")
+ideo
+```
+
+```{r}
+ideo %>%
+    set_option(chromosomes = c("X", "Y")) %>%
+    show_mapping(color = "green",
+        from = GRanges(c("X"), IRanges(c(20000000, 20000000), c(30000000, 30000000))),
+        to = GRanges(c("Y"), IRanges(c(10570133, 30010001), c(19603085, 32781479)))
+    )
+```

@@ -10,6 +10,7 @@ LazyData: true
 Suggests: shiny
 Imports: htmlwidgets, magrittr, GenomicRanges, dplyr, jsonlite
 Remotes:
+    bioc::release/S4Vectors,
     bioc::release/GenomicRanges
 RoxygenNote: 6.1.0
 Collate:

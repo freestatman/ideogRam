@@ -10,10 +10,6 @@ LazyData: true
 Suggests: shiny
 Imports: htmlwidgets, magrittr, GenomicRanges, dplyr, jsonlite
 Remotes:
-    r-lib/dplyr,
-    r-lib/magrittr,
-    r-lib/htmlwidgets,
-    r-lib/jsonlite,
     bioc::release/GenomicRanges
 RoxygenNote: 6.1.0
 Collate:

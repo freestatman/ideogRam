@@ -10,8 +10,8 @@ LazyData: true
 Suggests: shiny
 Imports: htmlwidgets, magrittr, GenomicRanges, dplyr, jsonlite
 Remotes:
-    bioc::3.5/S4Vectors,
-    bioc::3.5/GenomicRanges
+    bioc::3.3/S4Vectors,
+    bioc::3.3/GenomicRanges
 RoxygenNote: 6.1.0
 Collate:
     'ideogRam.R'

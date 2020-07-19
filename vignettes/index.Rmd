@@ -1,0 +1,10 @@
+---
+title: "Examples of ideogRam"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Mapping Ranges Between Chromosomes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Here are some Rmd/Shiny examples of ideogRam package.

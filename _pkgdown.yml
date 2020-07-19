@@ -1,0 +1,24 @@
+url: https://freestatman.github.io/ideogRam
+
+development:
+  mode: auto
+
+template:
+  params:
+    bootswatch: flatly
+    ganalytics: UA-172829356-1
+
+authors:
+  Freeman Wang:
+    href: https://freestatman.github.io
+
+home:
+  links:
+  - text: External data sets
+    href: http://github.com/freestatman/ideogRam
+
+navbar:
+  right:
+  - icon: fa-github
+    href: https://github.com/freestatman/ideogRam
+

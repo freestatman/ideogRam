@@ -1,3 +1,8 @@
+  <!-- badges: start -->
+  [![R build status](https://github.com/freestatman/ideogRam/workflows/R-CMD-che
+ck/badge.svg)](https://github.com/freestatman/ideogRam/actions)
+  <!-- badges: end -->
+
 # ideogRam R htmlwidget package
 
 ideogRam is an R htmlwidget wrapper package for Eric Weitz's ideogram.js [https://github.com/eweitz/ideogram].
@@ -24,6 +29,6 @@ You can also see a shiny application example with
 example("ideogRam-shiny")
 ```
 
-## Acknowledgement 
+## Acknowledgement
 
-Huge thanks to my mentors **Eric Weitz Jialin Ma** and **Freeman Wang** who helps me understand the nature of this project. 
+Huge thanks to my mentors **Eric Weitz Jialin Ma** and **Freeman Wang** who helps me understand the nature of this project.

@@ -22,32 +22,31 @@ NULL
 #'     add_track(data)
 #' p
 ideogRam <- function(..., width = NULL, height = NULL, elementId = NULL) {
+  sizepolicy <- htmlwidgets::sizingPolicy(
+    browser.fill = TRUE,
+    knitr.figure = FALSE,
+    knitr.defaultWidth = "100%",
+    knitr.defaultHeight = "auto"
+  )
 
-    sizepolicy <- htmlwidgets::sizingPolicy(
-        browser.fill = TRUE,
-        knitr.figure = FALSE,
-        knitr.defaultWidth = "100%",
-        knitr.defaultHeight = "auto"
-    )
+  # create widget
+  ans <- htmlwidgets::createWidget(
+    name = "ideogRam",
+    ## Initially it is NULL, but before rendering,
+    ## x will be modified by the "compile_ideogram" function
+    x = NULL,
+    width = width,
+    height = height,
+    sizingPolicy = sizepolicy,
+    package = "ideogRam",
+    elementId = elementId,
+    preRenderHook = compile_ideogram
+  )
 
-    # create widget
-    ans <- htmlwidgets::createWidget(
-                              name = 'ideogRam',
-                              ## Initially it is NULL, but before rendering,
-                              ## x will be modified by the "compile_ideogram" function
-                              x = NULL,
-                              width = width,
-                              height = height,
-                              sizingPolicy = sizepolicy,
-                              package = 'ideogRam',
-                              elementId = elementId,
-                              preRenderHook = compile_ideogram
-                              )
+  # Store the options to attributes
+  ideoraw(ans) <- list(...)
 
-    # Store the options to attributes
-    ideoraw(ans) <- list(...)
-
-    ans
+  ans
 }
 
 ## The structure of ideogram class currently is like the following:
@@ -57,75 +56,77 @@ ideogRam <- function(..., width = NULL, height = NULL, elementId = NULL) {
 
 # Function that runs before rendering
 compile_ideogram <- function(widget) {
-    # Extract options
-    ideoraw <- ideoraw(widget)
+  # Extract options
+  ideoraw <- ideoraw(widget)
 
-    ## Process annotations
-    # From the documentation:
-    #   Each annotation object has at least a chromosome name (chr), start coordinate (start),
-    #   and stop coordinate (stop).
-    #   Annotation objects can also have a name, color, shape, and track index.
-    ideoraw$annotations <- local({
-        annotations <- ideoraw[['annotations']]
-        for (i in seq_along(annotations))
-            stopifnot(is(annotations[[i]], "GRanges"))
-        if (length(annotations)) {
-            stopifnot(is.null(names(annotations)))
-            annotations <- do.call(c, annotations)
-            annotations <- as.data.frame(annotations) %>%
-                dplyr::rename(chr = seqnames, stop = end) %>%
-                dplyr::select(- width, - strand)
-        }
-        annotations
-    })
+  ## Process annotations
+  # From the documentation:
+  #   Each annotation object has at least a chromosome name (chr), start coordinate (start),
+  #   and stop coordinate (stop).
+  #   Annotation objects can also have a name, color, shape, and track index.
+  ideoraw$annotations <- local({
+    annotations <- ideoraw[["annotations"]]
+    for (i in seq_along(annotations)) {
+      stopifnot(is(annotations[[i]], "GRanges"))
+    }
+    if (length(annotations)) {
+      stopifnot(is.null(names(annotations)))
+      annotations <- do.call(c, annotations)
+      annotations <- as.data.frame(annotations) %>%
+        dplyr::rename(chr = seqnames, stop = end) %>%
+        dplyr::select(-width, -strand)
+    }
+    annotations
+  })
 
-    x <- list()
-    # Pass processed options
-    x$data <- ideoraw
+  x <- list()
+  # Pass processed options
+  x$data <- ideoraw
 
-    attr(x, 'TOJSON_ARGS') <- list(
-        auto_unbox = TRUE, dataframe = "rows"
-    )
+  attr(x, "TOJSON_ARGS") <- list(
+    auto_unbox = TRUE, dataframe = "rows"
+  )
 
-    widget$x <- x
-    widget
+  widget$x <- x
+  widget
 }
 
 
 ideoraw <- function(ideo) {
-    attr(ideo, "ideoraw")
+  attr(ideo, "ideoraw")
 }
 
 `ideoraw<-` <- function(ideo, value) {
-    attr(ideo, "ideoraw") <- value
-    ideo
+  attr(ideo, "ideoraw") <- value
+  ideo
 }
 
 #' @export
 add_track <- function(ideo, ...) {
-    stopifnot(inherits(ideo, "ideogRam"))
+  stopifnot(inherits(ideo, "ideogRam"))
 
-    dots <- list(...)
-    stopifnot(all(sapply(dots, function(x) is(x, "GRanges"))))
+  dots <- list(...)
+  stopifnot(all(sapply(dots, function(x) is(x, "GRanges"))))
 
-    ideoraw(ideo)$annotations <- c(ideoraw(ideo)[['annotations']], dots)
-    ideo
+  ideoraw(ideo)$annotations <- c(ideoraw(ideo)[["annotations"]], dots)
+  ideo
 }
 
 #' @export
 set_option <- function(ideo, ...) {
-    stopifnot(inherits(ideo, "ideogRam"))
+  stopifnot(inherits(ideo, "ideogRam"))
 
-    dots <- list(...)
-    if (is.null(names(dots)) || any(names(dots) == ""))
-        stop("Options must be named")
+  dots <- list(...)
+  if (is.null(names(dots)) || any(names(dots) == "")) {
+    stop("Options must be named")
+  }
 
-    ideoraw(ideo)[names(dots)] <- dots
+  ideoraw(ideo)[names(dots)] <- dots
 
-    # Validate the options
-    ideo_validate(ideo)
+  # Validate the options
+  ideo_validate(ideo)
 
-    ideo
+  ideo
 }
 
 
@@ -152,83 +153,95 @@ set_option <- function(ideo, ...) {
 #' library(ideogRam)
 #'
 #' server <- function(input, output) {
-#'     output$ideo_01 <- renderIdeogRam({
-#'         chromosome <- input$chromosome
-#'         organism <- input$organism
-#'         orientation <- input$orientation
-#'         if (orientation == "default")
-#'             orientation <- NULL
+#'   output$ideo_01 <- renderIdeogRam({
+#'     chromosome <- input$chromosome
+#'     organism <- input$organism
+#'     orientation <- input$orientation
+#'     if (orientation == "default") {
+#'       orientation <- NULL
+#'     }
 #'
-#'         barWidth <- as.numeric(input$barWidth)
-#'         chrHeight <- as.numeric(input$chrHeight)
-#'         chrMargin <- as.numeric(input$chrMargin)
-#'         chrWidth <- as.numeric(input$chrWidth)
+#'     barWidth <- as.numeric(input$barWidth)
+#'     chrHeight <- as.numeric(input$chrHeight)
+#'     chrMargin <- as.numeric(input$chrMargin)
+#'     chrWidth <- as.numeric(input$chrWidth)
 #'
-#'         ploidy <- input$ploidy
-#'         rows <- input$rows
-#'         sex <- input$sex
+#'     ploidy <- input$ploidy
+#'     rows <- input$rows
+#'     sex <- input$sex
 #'
-#'         rotatable <- as.logical(input$rotatable)
-#'         showBandLabels <- as.logical(input$showBandLabels)
-#'         showChromosomeLabels <- as.logical(input$showChromosomeLabels)
-#'         showAnnotTooltip <- as.logical(input$showAnnotTooltip)
-#'         showFullyBanded <- as.logical(input$showFullyBanded)
-#'         showNonNuclearChromosomes <- as.logical(input$showNonNuclearChromosomes)
+#'     rotatable <- as.logical(input$rotatable)
+#'     showBandLabels <- as.logical(input$showBandLabels)
+#'     showChromosomeLabels <- as.logical(input$showChromosomeLabels)
+#'     showAnnotTooltip <- as.logical(input$showAnnotTooltip)
+#'     showFullyBanded <- as.logical(input$showFullyBanded)
+#'     showNonNuclearChromosomes <- as.logical(input$showNonNuclearChromosomes)
 #'
-#'         ideogRam(organism = organism, chromosome = chromosome, orientation = orientation,
-#'                  barWidth = barWidth, chrHeight = chrHeight, chrMargin = chrMargin, chrWidth = chrWidth,
-#'                  ploidy = ploidy, rows = rows, sex = sex,
-#'                  rotatable = rotatable,
-#'                  showBandLabels = showBandLabels,
-#'                  showChromosomeLabels = showChromosomeLabels,
-#'                  showAnnotTooltip = showAnnotTooltip,
-#'                  showFullyBanded = showFullyBanded,
-#'                  showNonNuclearChromosomes = showNonNuclearChromosomes
-#'                  )
-#'     })
+#'     ideogRam(
+#'       organism = organism, chromosome = chromosome, orientation = orientation,
+#'       barWidth = barWidth, chrHeight = chrHeight, chrMargin = chrMargin, chrWidth = chrWidth,
+#'       ploidy = ploidy, rows = rows, sex = sex,
+#'       rotatable = rotatable,
+#'       showBandLabels = showBandLabels,
+#'       showChromosomeLabels = showChromosomeLabels,
+#'       showAnnotTooltip = showAnnotTooltip,
+#'       showFullyBanded = showFullyBanded,
+#'       showNonNuclearChromosomes = showNonNuclearChromosomes
+#'     )
+#'   })
 #' }
 #'
 #' ui <- shinyUI(fluidPage(
-#'     titlePanel("Hello IdeogRam!"),
-#'     sidebarPanel(
-#'         width = 4,
-#'         textInput("organism", label = "Organism", value = "human",
-#'                   placeholder = "Organism's name or organism's NCBI Taxonomy ID"),
-#'         textInput("chromosome", label = "Chromosome", value = "",
-#'                   placeholder = "Default showing all chromosomes"),
-#'         selectInput("orientation", label = "Orientation",
-#'                     choices = c("default", "horizontal", "vertical")),
-#'
-#'         numericInput("barWidth", label = "barWidth", value = 3, min = 1, max = 10),
-#'         numericInput("chrHeight", label = "chrHeight", value = 400, min = 10, max = 1000, step = 10),
-#'         numericInput("chrMargin", label = "chrMargin", value = 10, min = 0, max = 100, step = 1),
-#'         numericInput("chrWidth", label = "chrWidth", value = 10, min = 0, max = 100, step = 1),
-#'
-#'         numericInput("ploidy", label = "Ploidy", value = 1, min = 1, max = 8, step = 1),
-#'         numericInput("rows", label = "rows", value = 1, min = 1, max = 5, step = 1),
-#'         selectInput("sex", label = "sex", choices = c("male", "female")),
-#'         checkboxInput("rotatable", label = "rotatable", value = TRUE),
-#'         checkboxInput("showBandLabels", label = "showBandLabels", value = FALSE),
-#'         checkboxInput("showChromosomeLabels", label = "showChromosomeLabels", value = TRUE),
-#'         checkboxInput("showAnnotTooltip", label = "showAnnotTooltip", value = TRUE),
-#'         checkboxInput("showFullyBanded", label = "showFullyBanded", value = TRUE),
-#'         checkboxInput("showNonNuclearChromosomes", label = "showNonNuclearChromosomes", value = FALSE)
+#'   titlePanel("Hello IdeogRam!"),
+#'   sidebarPanel(
+#'     width = 4,
+#'     textInput("organism",
+#'       label = "Organism", value = "human",
+#'       placeholder = "Organism's name or organism's NCBI Taxonomy ID"
 #'     ),
-#'     mainPanel(
-#'         ideogRamOutput("ideo_01")
+#'     textInput("chromosome",
+#'       label = "Chromosome", value = "",
+#'       placeholder = "Default showing all chromosomes"
+#'     ),
+#'     selectInput("orientation",
+#'       label = "Orientation",
+#'       choices = c("default", "horizontal", "vertical")
+#'     ),
+#'
+#'     numericInput("barWidth", label = "barWidth", value = 3, min = 1, max = 10),
+#'     numericInput("chrHeight", label = "chrHeight", value = 400, min = 10, max = 1000, step = 10),
+#'     numericInput("chrMargin", label = "chrMargin", value = 10, min = 0, max = 100, step = 1),
+#'     numericInput("chrWidth", label = "chrWidth", value = 10, min = 0, max = 100, step = 1),
+#'
+#'     numericInput("ploidy", label = "Ploidy", value = 1, min = 1, max = 8, step = 1),
+#'     numericInput("rows", label = "rows", value = 1, min = 1, max = 5, step = 1),
+#'     selectInput("sex", label = "sex", choices = c("male", "female")),
+#'     checkboxInput("rotatable", label = "rotatable", value = TRUE),
+#'     checkboxInput("showBandLabels", label = "showBandLabels", value = FALSE),
+#'     checkboxInput("showChromosomeLabels", label = "showChromosomeLabels", value = TRUE),
+#'     checkboxInput("showAnnotTooltip", label = "showAnnotTooltip", value = TRUE),
+#'     checkboxInput("showFullyBanded", label = "showFullyBanded", value = TRUE),
+#'     checkboxInput("showNonNuclearChromosomes",
+#'       label = "showNonNuclearChromosomes",
+#'       value = FALSE
 #'     )
+#'   ),
+#'   mainPanel(
+#'     ideogRamOutput("ideo_01")
+#'   )
 #' ))
 #'
 #' runApp(list(ui = ui, server = server))
-
-ideogRamOutput <- function(outputId, width = '100%', height = '400px'){
-  htmlwidgets::shinyWidgetOutput(outputId, 'ideogRam', width, height, package = 'ideogRam')
+ideogRamOutput <- function(outputId, width = "100%", height = "400px") {
+  htmlwidgets::shinyWidgetOutput(outputId, "ideogRam", width, height, package = "ideogRam")
 }
 
 #' @rdname ideogRam-shiny
 #' @export
 renderIdeogRam <- function(expr, env = parent.frame(), quoted = FALSE) {
-  if (!quoted) { expr <- substitute(expr) } # force quoted
+  if (!quoted) {
+    expr <- substitute(expr)
+  } # force quoted
   htmlwidgets::shinyRenderWidget(expr, ideogRamOutput, env, quoted = TRUE)
 }
 
@@ -236,52 +249,62 @@ renderIdeogRam <- function(expr, env = parent.frame(), quoted = FALSE) {
 ## Util functions
 
 debug_ideo <- function(ideo) {
-    unclass(compile_ideogram(ideo))$x$data %>% jsonlite::prettify()
+  unclass(compile_ideogram(ideo))$x$data %>% jsonlite::prettify()
 }
 
 
 sample_10_virtual_cnvs <- function() {
-    path <- system.file("htmlwidgets/lib/ideogram/data/annotations", "10_virtual_cnvs.json",
-                        package = "ideogRam", mustWork = TRUE)
-    data <- jsonlite::fromJSON(path)
-    annots <- data$annots
+  path <- system.file("htmlwidgets/lib/ideogram/data/annotations", "10_virtual_cnvs.json",
+    package = "ideogRam", mustWork = TRUE
+  )
+  data <- jsonlite::fromJSON(path)
+  annots <- data$annots
 
-    seqnames <- rep(annots$chr, sapply(annots$annots, function(df) {
-        if (is.list(df) && length(df) == 0)
-            return(0)
-        else
-            return(nrow(df))
-    }))
-    seqnames
-    start <- unlist(lapply(annots$annots, function(df) {
-        if (is.list(df) && length(df) == 0)
-            return(numeric())
-        else
-            return(as.numeric(df[,2]))
-    }))
-    width <- unlist(lapply(annots$annots, function(df) {
-        if (is.list(df) && length(df) == 0)
-            return(numeric())
-        else
-            return(as.numeric(df[,3]))
-    }))
-    name <- unlist(lapply(annots$annots, function(df) {
-        if (is.list(df) && length(df) == 0)
-            return(character())
-        else
-            return(df[,1])
-    }))
-    color <- unlist(lapply(annots$annots, function(df) {
-        if (is.list(df) && length(df) == 0)
-            return(character())
-        else
-            return(df[,4])
-    }))
-    ans <- data.frame(seqnames = seqnames, start = start, width = width,
-                      name = name, color = color, stringsAsFactors = FALSE)
-    with(ans, GRanges(seqnames, IRanges(start = start, width = width),
-                      name = name, color = color))
+  seqnames <- rep(annots$chr, sapply(annots$annots, function(df) {
+    if (is.list(df) && length(df) == 0) {
+      return(0)
+    } else {
+      return(nrow(df))
+    }
+  }))
+  seqnames
+  start <- unlist(lapply(annots$annots, function(df) {
+    if (is.list(df) && length(df) == 0) {
+      return(numeric())
+    } else {
+      return(as.numeric(df[, 2]))
+    }
+  }))
+  width <- unlist(lapply(annots$annots, function(df) {
+    if (is.list(df) && length(df) == 0) {
+      return(numeric())
+    } else {
+      return(as.numeric(df[, 3]))
+    }
+  }))
+  name <- unlist(lapply(annots$annots, function(df) {
+    if (is.list(df) && length(df) == 0) {
+      return(character())
+    } else {
+      return(df[, 1])
+    }
+  }))
+  color <- unlist(lapply(annots$annots, function(df) {
+    if (is.list(df) && length(df) == 0) {
+      return(character())
+    } else {
+      return(df[, 4])
+    }
+  }))
+  ans <- data.frame(
+    seqnames = seqnames, start = start, width = width,
+    name = name, color = color, stringsAsFactors = FALSE
+  )
+  with(ans, GRanges(seqnames, IRanges(start = start, width = width),
+    name = name, color = color
+  ))
 }
 
-if (FALSE)
-    sample_10_virtual_cnvs()
+if (FALSE) {
+  sample_10_virtual_cnvs()
+}

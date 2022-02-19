@@ -19,7 +19,7 @@ Imports: htmlwidgets, magrittr, GenomicRanges, dplyr, jsonlite
 Remotes:
     bioc::release/S4Vectors,
     bioc::release/GenomicRanges
-RoxygenNote: 6.1.0
+RoxygenNote: 7.1.2
 Collate:
     'ideogRam.R'
     'ideogRam_mapping.R'

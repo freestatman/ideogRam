@@ -2,10 +2,31 @@
 % Please edit documentation in R/ideogRam.R
 \name{ideogRam}
 \alias{ideogRam}
-\title{<Add Title>}
+\title{Main function to generate ideogram htmlwidget visualization}
 \usage{
 ideogRam(..., width = NULL, height = NULL, elementId = NULL)
 }
+\arguments{
+\item{...}{Options add ideogram object attributes}
+
+\item{width}{Fixed width for widget (in css units). The default is NULL, which results in intelligent automatic sizing based on the widget's container.}
+
+\item{height}{Fixed height for widget (in css units). The default is NULL, which results in intelligent automatic sizing based on the widget's container.}
+
+\item{elementId}{Use an explicit element ID for the widget (rather than an automatically generated one). Useful if you have other JavaScript that needs to explicitly discover and interact with a specific widget instance.}
+}
 \description{
-<Add Description>
+Main function to generate ideogram htmlwidget visualization
+}
+\examples{
+library(GenomicRanges)
+data <- GRanges(c("2", "17"),
+                IRanges(c(34294, 43125400), c(125482, 43125482)),
+                color = c("red", "green"))
+
+p <- ideogRam(organism = "human") \%>\%
+    set_option(orientation = "horizontal") \%>\%
+    add_track(data)
+p
+
 }

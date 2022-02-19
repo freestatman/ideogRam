@@ -15,7 +15,7 @@ devtools::install_github("freestatman/ideogRam")
 
 ## Example
 
-See [example](https://github.com/freestatman/ideogRam/blob/master/example/ideogRam_examples.R) directory for some basic examples. more documentation is on the way...
+See [vignettes](https://github.com/freestatman/ideogRam/blob/master/vignettes/shiny_app01/app.R) folder for some basic examples.
 
 Run the following R code to build the example website to "doc" directory:
 

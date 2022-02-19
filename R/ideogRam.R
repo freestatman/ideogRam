@@ -6,21 +6,27 @@ magrittr::`%>%`
 #' @import GenomicRanges
 NULL
 
-#' <Add Title>
+#' Main function to generate ideogram htmlwidget visualization
 #'
-#' <Add Description>
+#' @param ... Options add ideogram object attributes
+#' @param width Fixed width for widget (in css units). The default is NULL, which results in intelligent automatic sizing based on the widget's container.
+#' @param height Fixed height for widget (in css units). The default is NULL, which results in intelligent automatic sizing based on the widget's container.
+#' @param elementId Use an explicit element ID for the widget (rather than an automatically generated one). Useful if you have other JavaScript that needs to explicitly discover and interact with a specific widget instance.
 #'
 #' @import htmlwidgets
 #'
 #' @export
-#' @example
+#' @examples
+#' library(GenomicRanges)
 #' data <- GRanges(c("2", "17"),
-#'                 IRanges(c(34294, 43125400), c(125482, 43125482)), color = c("red", "green"))
+#'                 IRanges(c(34294, 43125400), c(125482, 43125482)),
+#'                 color = c("red", "green"))
 #'
 #' p <- ideogRam(organism = "human") %>%
 #'     set_option(orientation = "horizontal") %>%
 #'     add_track(data)
 #' p
+#'
 ideogRam <- function(..., width = NULL, height = NULL, elementId = NULL) {
   sizepolicy <- htmlwidgets::sizingPolicy(
     browser.fill = TRUE,
@@ -136,19 +142,13 @@ set_option <- function(ideo, ...) {
 #' Output and render functions for using ideogRam within Shiny
 #' applications and interactive Rmd documents.
 #'
+#' @param width
+#' @param height
 #' @param outputId output variable to read from
-#' @param width,height Must be a valid CSS unit (like \code{'100\%'},
-#'   \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
-#'   string and have \code{'px'} appended.
-#' @param expr An expression that generates a ideogRam
-#' @param env The environment in which to evaluate \code{expr}.
-#' @param quoted Is \code{expr} a quoted expression (with \code{quote()})? This
-#'   is useful if you want to save an expression in a variable.
-#'
-#' @name ideogRam-shiny
 #'
 #' @export
 #' @examples
+#' \dontrun{
 #' library(shiny)
 #' library(ideogRam)
 #'
@@ -231,13 +231,106 @@ set_option <- function(ideo, ...) {
 #'   )
 #' ))
 #'
-#' runApp(list(ui = ui, server = server))
+#' shinyApp(ui = ui, server = server)
+#' }
 ideogRamOutput <- function(outputId, width = "100%", height = "400px") {
   htmlwidgets::shinyWidgetOutput(outputId, "ideogRam", width, height, package = "ideogRam")
 }
 
-#' @rdname ideogRam-shiny
+
+#' Shiny render function for ideogRam
+#'
+#' @param expr
+#' @param env
+#' @param quoted
+#'
 #' @export
+#' @examples
+#' \dontrun{
+#' library(shiny)
+#' library(ideogRam)
+#'
+#' server <- function(input, output) {
+#'   output$ideo_01 <- renderIdeogRam({
+#'     chromosome <- input$chromosome
+#'     organism <- input$organism
+#'     orientation <- input$orientation
+#'     if (orientation == "default") {
+#'       orientation <- NULL
+#'     }
+#'
+#'     barWidth <- as.numeric(input$barWidth)
+#'     chrHeight <- as.numeric(input$chrHeight)
+#'     chrMargin <- as.numeric(input$chrMargin)
+#'     chrWidth <- as.numeric(input$chrWidth)
+#'
+#'     ploidy <- input$ploidy
+#'     rows <- input$rows
+#'     sex <- input$sex
+#'
+#'     rotatable <- as.logical(input$rotatable)
+#'     showBandLabels <- as.logical(input$showBandLabels)
+#'     showChromosomeLabels <- as.logical(input$showChromosomeLabels)
+#'     showAnnotTooltip <- as.logical(input$showAnnotTooltip)
+#'     showFullyBanded <- as.logical(input$showFullyBanded)
+#'     showNonNuclearChromosomes <- as.logical(input$showNonNuclearChromosomes)
+#'
+#'     ideogRam(
+#'       organism = organism, chromosome = chromosome, orientation = orientation,
+#'       barWidth = barWidth, chrHeight = chrHeight, chrMargin = chrMargin, chrWidth = chrWidth,
+#'       ploidy = ploidy, rows = rows, sex = sex,
+#'       rotatable = rotatable,
+#'       showBandLabels = showBandLabels,
+#'       showChromosomeLabels = showChromosomeLabels,
+#'       showAnnotTooltip = showAnnotTooltip,
+#'       showFullyBanded = showFullyBanded,
+#'       showNonNuclearChromosomes = showNonNuclearChromosomes
+#'     )
+#'   })
+#' }
+#'
+#' ui <- shinyUI(fluidPage(
+#'   titlePanel("Hello IdeogRam!"),
+#'   sidebarPanel(
+#'     width = 4,
+#'     textInput("organism",
+#'       label = "Organism", value = "human",
+#'       placeholder = "Organism's name or organism's NCBI Taxonomy ID"
+#'     ),
+#'     textInput("chromosome",
+#'       label = "Chromosome", value = "",
+#'       placeholder = "Default showing all chromosomes"
+#'     ),
+#'     selectInput("orientation",
+#'       label = "Orientation",
+#'       choices = c("default", "horizontal", "vertical")
+#'     ),
+#'
+#'     numericInput("barWidth", label = "barWidth", value = 3, min = 1, max = 10),
+#'     numericInput("chrHeight", label = "chrHeight", value = 400, min = 10, max = 1000, step = 10),
+#'     numericInput("chrMargin", label = "chrMargin", value = 10, min = 0, max = 100, step = 1),
+#'     numericInput("chrWidth", label = "chrWidth", value = 10, min = 0, max = 100, step = 1),
+#'
+#'     numericInput("ploidy", label = "Ploidy", value = 1, min = 1, max = 8, step = 1),
+#'     numericInput("rows", label = "rows", value = 1, min = 1, max = 5, step = 1),
+#'     selectInput("sex", label = "sex", choices = c("male", "female")),
+#'     checkboxInput("rotatable", label = "rotatable", value = TRUE),
+#'     checkboxInput("showBandLabels", label = "showBandLabels", value = FALSE),
+#'     checkboxInput("showChromosomeLabels", label = "showChromosomeLabels", value = TRUE),
+#'     checkboxInput("showAnnotTooltip", label = "showAnnotTooltip", value = TRUE),
+#'     checkboxInput("showFullyBanded", label = "showFullyBanded", value = TRUE),
+#'     checkboxInput("showNonNuclearChromosomes",
+#'       label = "showNonNuclearChromosomes",
+#'       value = FALSE
+#'     )
+#'   ),
+#'   mainPanel(
+#'     ideogRamOutput("ideo_01")
+#'   )
+#' ))
+#'
+#' shinyApp(ui = ui, server = server)
+#' }
 renderIdeogRam <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) {
     expr <- substitute(expr)

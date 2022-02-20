@@ -1,7 +1,7 @@
-  <!-- badges: start -->
-  [![R build status](https://github.com/freestatman/ideogRam/workflows/R-CMD-che
-ck/badge.svg)](https://github.com/freestatman/ideogRam/actions)
-  <!-- badges: end -->
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/freestatman/ideogRam/workflows/R-CMD-check/
+badge.svg)](https://github.com/freestatman/ideogRam/actions)
+<!-- badges: end -->
 
 # ideogRam R htmlwidget package
 
@@ -11,24 +11,20 @@ This package is written for the [R project in GSoC 2018](https://summerofcode.wi
 
 ## Install
 
+```r
 devtools::install_github("freestatman/ideogRam")
+```
 
 ## Example
 
-See [vignettes](https://github.com/freestatman/ideogRam/blob/master/vignettes/shiny_app01/app.R) folder for some basic examples.
+See [vignettes](https://freestatman.github.io/ideogRam/articles/example1.html) for some basic examples.
 
-Run the following R code to build the example website to "doc" directory:
-
+ideogRam also works in shiny applications:
 ```r
-rmarkdown::render_site("example")
-```
-
-You can also see a shiny application example with
-
-```r
-example("ideogRam-shiny")
+example("renderIdeogRam")
+example("ideogRamOutput")
 ```
 
 ## Acknowledgement
 
-Huge thanks to my mentors **Eric Weitz Jialin Ma** and **Freeman Wang** who helps me understand the nature of this project.
+Huge thanks to my mentors **Eric Weitz, Jialin Ma** and **Freeman Wang** who helps me understand the nature of this project.

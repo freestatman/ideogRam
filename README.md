@@ -1,6 +1,5 @@
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/freestatman/ideogRam/workflows/R-CMD-check/
-badge.svg)](https://github.com/freestatman/ideogRam/actions)
+[![R-CMD-check](https://github.com/freestatman/ideogRam/workflows/R-CMD-check/badge.svg)](https://github.com/freestatman/ideogRam/actions)
 <!-- badges: end -->
 
 # ideogRam R htmlwidget package

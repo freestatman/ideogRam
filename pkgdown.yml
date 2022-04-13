@@ -4,8 +4,8 @@ pkgdown_sha: ~
 articles:
   example1: example1.html
   example2: example2.html
-  example_shiny: example_shiny.html
-last_built: 2022-03-18T22:16Z
+  example3_shiny: example3_shiny.html
+last_built: 2022-04-13T01:49Z
 urls:
   reference: https://freestatman.github.io/ideogRam/reference
   article: https://freestatman.github.io/ideogRam/articles

@@ -62,7 +62,7 @@
       <a href="../articles/example2.html">Mapping Ranges Between Chromosomes</a>
     </li>
     <li>
-      <a href="../articles/example_shiny.html">ideogRam Shiny Example</a>
+      <a href="../articles/example3_shiny.html">ideogRam Shiny Example</a>
     </li>
   </ul>
 </li>
@@ -130,8 +130,8 @@
 <p>A human genome is depicted below. The grey and black bands in each chromosome represent heterochromatin. The pink region is the area around the centromere, and the blue represents variable regions.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ideogRam.html">ideogRam</a></span><span class="op">(</span>organism <span class="op">=</span> <span class="st">"human"</span>, chrHeight <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-0f47afc06ea0656b8a5b" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0f47afc06ea0656b8a5b">{"x":{"data":{"organism":"human","chrHeight":500}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-5e89608fdbe29822d419" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5e89608fdbe29822d419">{"x":{"data":{"organism":"human","chrHeight":500}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="mouse">Mouse<a class="anchor" aria-label="anchor" href="#mouse"></a>
@@ -143,8 +143,8 @@
     showBandLabels <span class="op">=</span> <span class="cn">TRUE</span>,
     chrHeight <span class="op">=</span> <span class="fl">300</span>
 <span class="op">)</span></code></pre></div>
-<div id="htmlwidget-dc152ce9ae071b4afa8d" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
-<script type="application/json" data-for="htmlwidget-dc152ce9ae071b4afa8d">{"x":{"data":{"organism":"mouse","orientation":"horizontal","showBandLabels":true,"chrHeight":300}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-709b16a796e507d700ea" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
+<script type="application/json" data-for="htmlwidget-709b16a796e507d700ea">{"x":{"data":{"organism":"mouse","orientation":"horizontal","showBandLabels":true,"chrHeight":300}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="annotations-basic">Annotations, basic<a class="anchor" aria-label="anchor" href="#annotations-basic"></a>
@@ -157,8 +157,8 @@
     <span class="fu">set_option</span><span class="op">(</span>chromosomes <span class="op">=</span> <span class="st">'17'</span>, chrHeight <span class="op">=</span> <span class="fl">600</span>, orientation <span class="op">=</span> <span class="st">"horizontal"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
     <span class="fu">set_option</span><span class="op">(</span>showAnnotTooltip <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
     <span class="fu">add_track</span><span class="op">(</span><span class="va">brca1</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-0b51d7b04b7bce6578cb" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0b51d7b04b7bce6578cb">{"x":{"data":{"organism":"human","chromosomes":"17","chrHeight":600,"orientation":"horizontal","showAnnotTooltip":true,"annotations":[{"chr":"17","start":43044294,"stop":43125482,"name":"BRCA1"}]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-2bcdbe0aec2f5b659278" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2bcdbe0aec2f5b659278">{"x":{"data":{"organism":"human","chromosomes":"17","chrHeight":600,"orientation":"horizontal","showAnnotTooltip":true,"annotations":[{"chr":"17","start":43044294,"stop":43125482,"name":"BRCA1"}]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="annotations-overlaid">Annotations, overlaid<a class="anchor" aria-label="anchor" href="#annotations-overlaid"></a>
@@ -199,8 +199,8 @@
     <span class="fu">set_option</span><span class="op">(</span>chrHeight <span class="op">=</span> <span class="fl">300</span>, chrMargin <span class="op">=</span> <span class="fl">2</span>, annotationsLayout <span class="op">=</span> <span class="st">"overlay"</span>,
                orientation <span class="op">=</span> <span class="st">"horizontal"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
     <span class="fu">add_track</span><span class="op">(</span><span class="va">ten_virtual_cnvs</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-eb8907bfb424e6889855" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
-<script type="application/json" data-for="htmlwidget-eb8907bfb424e6889855">{"x":{"data":{"organism":"human","chrHeight":300,"chrMargin":2,"annotationsLayout":"overlay","orientation":"horizontal","annotations":[{"chr":"1","start":30000000,"stop":35999999,"name":"virtual1","color":"rgba(255, 0, 0, 0.65)"},{"chr":"1","start":40000000,"stop":44999999,"name":"virtual2","color":"rgba(0, 255, 0, 0.65)"},{"chr":"2","start":40738282,"stop":57863820,"name":"nsv531656","color":"rgba(255, 0, 0, 0.65)"},{"chr":"2","start":30000000,"stop":38999999,"name":"2","color":"rgba(255, 0, 0, 0.65)"},{"chr":"20","start":30954171,"stop":30959986,"name":"observation 1","color":"rgba(255, 0, 0, 0.65)"},{"chr":"3","start":30000000,"stop":38999999,"name":" ","color":"rgba(0, 255, 0, 0.65)"},{"chr":"3","start":33000000,"stop":35999999,"name":"virtual3","color":"rgba(255, 0, 0, 0.65)"},{"chr":"9","start":120000000,"stop":128999999,"name":"a duplicate name","color":"rgba(0, 255, 0, 0.65)"},{"chr":"9","start":12000000,"stop":23999999,"name":"a duplicate name","color":"rgba(255, 0, 0, 0.65)"},{"chr":"X","start":47422351,"stop":47429070,"name":"observation 2","color":"rgba(0, 0, 255, 0.65)"}]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-547691d5d667d604cb3d" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
+<script type="application/json" data-for="htmlwidget-547691d5d667d604cb3d">{"x":{"data":{"organism":"human","chrHeight":300,"chrMargin":2,"annotationsLayout":"overlay","orientation":"horizontal","annotations":[{"chr":"1","start":30000000,"stop":35999999,"name":"virtual1","color":"rgba(255, 0, 0, 0.65)"},{"chr":"1","start":40000000,"stop":44999999,"name":"virtual2","color":"rgba(0, 255, 0, 0.65)"},{"chr":"2","start":40738282,"stop":57863820,"name":"nsv531656","color":"rgba(255, 0, 0, 0.65)"},{"chr":"2","start":30000000,"stop":38999999,"name":"2","color":"rgba(255, 0, 0, 0.65)"},{"chr":"20","start":30954171,"stop":30959986,"name":"observation 1","color":"rgba(255, 0, 0, 0.65)"},{"chr":"3","start":30000000,"stop":38999999,"name":" ","color":"rgba(0, 255, 0, 0.65)"},{"chr":"3","start":33000000,"stop":35999999,"name":"virtual3","color":"rgba(255, 0, 0, 0.65)"},{"chr":"9","start":120000000,"stop":128999999,"name":"a duplicate name","color":"rgba(0, 255, 0, 0.65)"},{"chr":"9","start":12000000,"stop":23999999,"name":"a duplicate name","color":"rgba(255, 0, 0, 0.65)"},{"chr":"X","start":47422351,"stop":47429070,"name":"observation 2","color":"rgba(0, 0, 255, 0.65)"}]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="annotations-tracks">Annotations, tracks<a class="anchor" aria-label="anchor" href="#annotations-tracks"></a>
@@ -212,8 +212,8 @@
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ideogRam.html">ideogRam</a></span><span class="op">(</span>organism <span class="op">=</span> <span class="st">"human"</span>, orientation <span class="op">=</span> <span class="st">"vertical"</span>, rows <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
     <span class="fu">set_option</span><span class="op">(</span>resolution <span class="op">=</span> <span class="fl">550</span>, chrHeight <span class="op">=</span> <span class="fl">150</span>, rotatable <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-f921d21795bc2a338897" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f921d21795bc2a338897">{"x":{"data":{"organism":"human","orientation":"vertical","rows":2,"resolution":550,"chrHeight":150,"rotatable":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-cac309098db3a5eda080" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cac309098db3a5eda080">{"x":{"data":{"organism":"human","orientation":"vertical","rows":2,"resolution":550,"chrHeight":150,"rotatable":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="brush">Brush<a class="anchor" aria-label="anchor" href="#brush"></a>
@@ -227,8 +227,8 @@
     orientation <span class="op">=</span> <span class="st">"horizontal"</span>,
     brush <span class="op">=</span> <span class="cn">TRUE</span>  <span class="co">## In the new version, we need to give a string</span>
 <span class="op">)</span></code></pre></div>
-<div id="htmlwidget-dc499a1da7e361fa3e75" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
-<script type="application/json" data-for="htmlwidget-dc499a1da7e361fa3e75">{"x":{"data":{"organism":"human","chromosome":"1","resolution":550,"chrHeight":600,"orientation":"horizontal","brush":true}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-2d87d8bbc8ad897ae8e3" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2d87d8bbc8ad897ae8e3">{"x":{"data":{"organism":"human","chromosome":"1","resolution":550,"chrHeight":600,"orientation":"horizontal","brush":true}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="ploidy-basic">Ploidy, basic<a class="anchor" aria-label="anchor" href="#ploidy-basic"></a>
@@ -241,8 +241,8 @@
     chrWidth <span class="op">=</span> <span class="fl">8</span>,
     ploidy <span class="op">=</span> <span class="fl">2</span>
 <span class="op">)</span></code></pre></div>
-<div id="htmlwidget-3377241cb10487063fec" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
-<script type="application/json" data-for="htmlwidget-3377241cb10487063fec">{"x":{"data":{"organism":"human","sex":"female","chrHeight":300,"chrWidth":8,"ploidy":2}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-1224668e8b43a5fd911f" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1224668e8b43a5fd911f">{"x":{"data":{"organism":"human","sex":"female","chrHeight":300,"chrWidth":8,"ploidy":2}},"evals":[],"jsHooks":[]}</script>
 </div>
   </div>
 

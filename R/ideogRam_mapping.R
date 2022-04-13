@@ -1,4 +1,3 @@
-
 #' @export
 show_mapping <- function(ideo, from, to, color = "green", opacity = 0.5) {
   ori.opts <- ideoraw(ideo)

@@ -1,7 +1,5 @@
-
 #' @include ideogRam.R
 NULL
-
 
 ideo_validate <- function(ideo) {
   validate_opts(ideo)

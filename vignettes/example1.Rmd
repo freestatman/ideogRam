@@ -14,7 +14,7 @@ library(GenomicRanges)
 
 ## Human
 
-A human genome is depicted below. The grey and black bands in each chromosome represent heterochromatin. The pink region is the area around the centromere, and the blue represents variable regions. 
+A human genome is depicted below. The grey and black bands in each chromosome represent heterochromatin. The pink region is the area around the centromere, and the blue represents variable regions.
 
 ```{r}
 ideogRam(organism = "human", chrHeight = 500)
@@ -92,4 +92,3 @@ ideogRam(
     ploidy = 2
 )
 ```
-

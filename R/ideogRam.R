@@ -2,15 +2,22 @@
 #' @export
 magrittr::`%>%`
 
+
 #' @import GenomicRanges
 NULL
 
 #' Main function to generate ideogram htmlwidget visualization
 #'
 #' @param ... Options add ideogram object attributes
-#' @param width Fixed width for widget (in css units). The default is NULL, which results in intelligent automatic sizing based on the widget's container.
-#' @param height Fixed height for widget (in css units). The default is NULL, which results in intelligent automatic sizing based on the widget's container.
-#' @param elementId Use an explicit element ID for the widget (rather than an automatically generated one). Useful if you have other JavaScript that needs to explicitly discover and interact with a specific widget instance.
+#' @param width Fixed width for widget (in css units). The default is NULL,
+#' which results in intelligent automatic sizing based on the widget's
+#' container.
+#' @param height Fixed height for widget (in css units). The default is NULL,
+#' which results in intelligent automatic sizing based on the widget's
+#' container.
+#' @param elementId Use an explicit element ID for the widget (rather than an
+#' automatically generated one). Useful if you have other JavaScript that needs
+#' to explicitly discover and interact with a specific widget instance.
 #'
 #' @import htmlwidgets
 #'
@@ -18,14 +25,14 @@ NULL
 #' @examples
 #' library(GenomicRanges)
 #' data <- GRanges(c("2", "17"),
-#'                 IRanges(c(34294, 43125400), c(125482, 43125482)),
-#'                 color = c("red", "green"))
+#'   IRanges(c(34294, 43125400), c(125482, 43125482)),
+#'   color = c("red", "green")
+#' )
 #'
 #' p <- ideogRam(organism = "human") %>%
-#'     set_option(orientation = "horizontal") %>%
-#'     add_track(data)
+#'   set_option(orientation = "horizontal") %>%
+#'   add_track(data)
 #' p
-#'
 ideogRam <- function(..., width = NULL, height = NULL, elementId = NULL) {
   sizepolicy <- htmlwidgets::sizingPolicy(
     browser.fill = TRUE,
@@ -34,7 +41,7 @@ ideogRam <- function(..., width = NULL, height = NULL, elementId = NULL) {
     knitr.defaultHeight = "auto"
   )
 
-  # create widget
+  ## create widget
   ans <- htmlwidgets::createWidget(
     name = "ideogRam",
     ## Initially it is NULL, but before rendering,
@@ -48,7 +55,7 @@ ideogRam <- function(..., width = NULL, height = NULL, elementId = NULL) {
     preRenderHook = compile_ideogram
   )
 
-  # Store the options to attributes
+  ## Store the options to attributes
   ideoraw(ans) <- list(...)
 
   ans
@@ -59,16 +66,15 @@ ideogRam <- function(..., width = NULL, height = NULL, elementId = NULL) {
 ##      - options: a list of options
 ##      - tracks: a list of GRanges
 
-# Function that runs before rendering
+## Function that runs before rendering
 compile_ideogram <- function(widget) {
-  # Extract options
+  ## Extract options
   ideoraw <- ideoraw(widget)
 
   ## Process annotations
-  # From the documentation:
-  #   Each annotation object has at least a chromosome name (chr), start coordinate (start),
-  #   and stop coordinate (stop).
-  #   Annotation objects can also have a name, color, shape, and track index.
+  ## From the documentation: Each annotation object has at least a chromosome
+  ## name (chr), start coordinate (start), and stop coordinate (stop). Annotation
+  ## objects can also have a name, color, shape, and track index.
   ideoraw$annotations <- local({
     annotations <- ideoraw[["annotations"]]
     for (i in seq_along(annotations)) {
@@ -85,7 +91,7 @@ compile_ideogram <- function(widget) {
   })
 
   x <- list()
-  # Pass processed options
+  ## Pass processed options
   x$data <- ideoraw
 
   attr(x, "TOJSON_ARGS") <- list(
@@ -206,12 +212,10 @@ set_option <- function(ideo, ...) {
 #'       label = "Orientation",
 #'       choices = c("default", "horizontal", "vertical")
 #'     ),
-#'
 #'     numericInput("barWidth", label = "barWidth", value = 3, min = 1, max = 10),
 #'     numericInput("chrHeight", label = "chrHeight", value = 400, min = 10, max = 1000, step = 10),
 #'     numericInput("chrMargin", label = "chrMargin", value = 10, min = 0, max = 100, step = 1),
 #'     numericInput("chrWidth", label = "chrWidth", value = 10, min = 0, max = 100, step = 1),
-#'
 #'     numericInput("ploidy", label = "Ploidy", value = 1, min = 1, max = 8, step = 1),
 #'     numericInput("rows", label = "rows", value = 1, min = 1, max = 5, step = 1),
 #'     selectInput("sex", label = "sex", choices = c("male", "female")),
@@ -304,12 +308,10 @@ ideogRamOutput <- function(outputId, width = "100%", height = "400px") {
 #'       label = "Orientation",
 #'       choices = c("default", "horizontal", "vertical")
 #'     ),
-#'
 #'     numericInput("barWidth", label = "barWidth", value = 3, min = 1, max = 10),
 #'     numericInput("chrHeight", label = "chrHeight", value = 400, min = 10, max = 1000, step = 10),
 #'     numericInput("chrMargin", label = "chrMargin", value = 10, min = 0, max = 100, step = 1),
 #'     numericInput("chrWidth", label = "chrWidth", value = 10, min = 0, max = 100, step = 1),
-#'
 #'     numericInput("ploidy", label = "Ploidy", value = 1, min = 1, max = 8, step = 1),
 #'     numericInput("rows", label = "rows", value = 1, min = 1, max = 5, step = 1),
 #'     selectInput("sex", label = "sex", choices = c("male", "female")),
@@ -396,4 +398,3 @@ sample_10_virtual_cnvs <- function() {
     name = name, color = color
   ))
 }
-

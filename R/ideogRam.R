@@ -1,4 +1,3 @@
-
 #' @importFrom magrittr %>%
 #' @export
 magrittr::`%>%`
@@ -398,6 +397,3 @@ sample_10_virtual_cnvs <- function() {
   ))
 }
 
-if (FALSE) {
-  sample_10_virtual_cnvs()
-}

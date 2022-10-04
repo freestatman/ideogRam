@@ -24,10 +24,10 @@ ideogRam(organism = "human", chrHeight = 500)
 
 ```{r}
 ideogRam(
-    organism = "mouse",
-    orientation = "horizontal",
-    showBandLabels = TRUE,
-    chrHeight = 300
+  organism = "mouse",
+  orientation = "horizontal",
+  showBandLabels = TRUE,
+  chrHeight = 300
 )
 ```
 
@@ -36,12 +36,12 @@ ideogRam(
 The location of BRCA1 is depicted here in red.
 
 ```{r}
-brca1 <- GRanges('17', IRanges(43044294, 43125482), name = "BRCA1")
+brca1 <- GRanges("17", IRanges(43044294, 43125482), name = "BRCA1")
 # This seems a bug, as it shows chromosomes 1, 7 and 17.
 ideogRam(organism = "human") %>%
-    set_option(chromosomes = '17', chrHeight = 600, orientation = "horizontal") %>%
-    set_option(showAnnotTooltip = TRUE) %>%
-    add_track(brca1)
+  set_option(chromosomes = "17", chrHeight = 600, orientation = "horizontal") %>%
+  set_option(showAnnotTooltip = TRUE) %>%
+  add_track(brca1)
 ```
 
 ## Annotations, overlaid
@@ -52,9 +52,11 @@ Large-scale structural variations (SVs) can be depicted using colored overlays, 
 ten_virtual_cnvs <- ideogRam:::sample_10_virtual_cnvs()
 ten_virtual_cnvs
 ideogRam(organism = "human") %>%
-    set_option(chrHeight = 300, chrMargin = 2, annotationsLayout = "overlay",
-               orientation = "horizontal") %>%
-    add_track(ten_virtual_cnvs)
+  set_option(
+    chrHeight = 300, chrMargin = 2, annotationsLayout = "overlay",
+    orientation = "horizontal"
+  ) %>%
+  add_track(ten_virtual_cnvs)
 ```
 
 ## Annotations, tracks
@@ -65,19 +67,19 @@ ideogRam(organism = "human") %>%
 
 ```{r}
 ideogRam(organism = "human", orientation = "vertical", rows = 2) %>%
-    set_option(resolution = 550, chrHeight = 150, rotatable = FALSE)
+  set_option(resolution = 550, chrHeight = 150, rotatable = FALSE)
 ```
 
 ## Brush
 
 ```{r}
 ideogRam(
-    organism = "human",
-    chromosome = "1",
-    resolution = 550,
-    chrHeight = 600,
-    orientation = "horizontal",
-    brush = TRUE  ## In the new version, we need to give a string
+  organism = "human",
+  chromosome = "1",
+  resolution = 550,
+  chrHeight = 600,
+  orientation = "horizontal",
+  brush = TRUE ## In the new version, we need to give a string
 )
 ```
 
@@ -85,10 +87,10 @@ ideogRam(
 
 ```{r}
 ideogRam(
-    organism = "human",
-    sex = "female",
-    chrHeight = 300,
-    chrWidth = 8,
-    ploidy = 2
+  organism = "human",
+  sex = "female",
+  chrHeight = 300,
+  chrWidth = 8,
+  ploidy = 2
 )
 ```

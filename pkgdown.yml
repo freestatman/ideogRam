@@ -1,11 +1,11 @@
 pandoc: 2.7.3
-pkgdown: 2.0.2
+pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   example1: example1.html
   example2: example2.html
   example3_shiny: example3_shiny.html
-last_built: 2022-04-13T01:49Z
+last_built: 2022-10-26T03:07Z
 urls:
   reference: https://freestatman.github.io/ideogRam/reference
   article: https://freestatman.github.io/ideogRam/articles

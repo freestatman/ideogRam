@@ -99,108 +99,108 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">ideogRam</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/GenomicRanges" class="external-link">GenomicRanges</a></span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## Loading required package: stats4</span></code></pre>
-<pre><code><span class="co">## Loading required package: BiocGenerics</span></code></pre>
-<pre><code><span class="co">## </span>
-<span class="co">## Attaching package: 'BiocGenerics'</span></code></pre>
-<pre><code><span class="co">## The following objects are masked from 'package:stats':</span>
-<span class="co">## </span>
-<span class="co">##     IQR, mad, sd, var, xtabs</span></code></pre>
-<pre><code><span class="co">## The following objects are masked from 'package:base':</span>
-<span class="co">## </span>
-<span class="co">##     anyDuplicated, append, as.data.frame, basename, cbind, colnames,</span>
-<span class="co">##     dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,</span>
-<span class="co">##     grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,</span>
-<span class="co">##     order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,</span>
-<span class="co">##     rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,</span>
-<span class="co">##     union, unique, unsplit, which.max, which.min</span></code></pre>
-<pre><code><span class="co">## Loading required package: S4Vectors</span></code></pre>
-<pre><code><span class="co">## </span>
-<span class="co">## Attaching package: 'S4Vectors'</span></code></pre>
-<pre><code><span class="co">## The following objects are masked from 'package:base':</span>
-<span class="co">## </span>
-<span class="co">##     expand.grid, I, unname</span></code></pre>
-<pre><code><span class="co">## Loading required package: IRanges</span></code></pre>
-<pre><code><span class="co">## Loading required package: GenomeInfoDb</span></code></pre>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">ideogRam</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/GenomicRanges" class="external-link">GenomicRanges</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Loading required package: stats4</span></span></code></pre>
+<pre><code><span><span class="co">## Loading required package: BiocGenerics</span></span></code></pre>
+<pre><code><span><span class="co">## </span></span>
+<span><span class="co">## Attaching package: 'BiocGenerics'</span></span></code></pre>
+<pre><code><span><span class="co">## The following objects are masked from 'package:stats':</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##     IQR, mad, sd, var, xtabs</span></span></code></pre>
+<pre><code><span><span class="co">## The following objects are masked from 'package:base':</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##     anyDuplicated, append, as.data.frame, basename, cbind, colnames,</span></span>
+<span><span class="co">##     dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,</span></span>
+<span><span class="co">##     grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,</span></span>
+<span><span class="co">##     order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,</span></span>
+<span><span class="co">##     rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,</span></span>
+<span><span class="co">##     union, unique, unsplit, which.max, which.min</span></span></code></pre>
+<pre><code><span><span class="co">## Loading required package: S4Vectors</span></span></code></pre>
+<pre><code><span><span class="co">## </span></span>
+<span><span class="co">## Attaching package: 'S4Vectors'</span></span></code></pre>
+<pre><code><span><span class="co">## The following objects are masked from 'package:base':</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##     expand.grid, I, unname</span></span></code></pre>
+<pre><code><span><span class="co">## Loading required package: IRanges</span></span></code></pre>
+<pre><code><span><span class="co">## Loading required package: GenomeInfoDb</span></span></code></pre>
 <div class="section level2">
 <h2 id="human">Human<a class="anchor" aria-label="anchor" href="#human"></a>
 </h2>
 <p>A human genome is depicted below. The grey and black bands in each chromosome represent heterochromatin. The pink region is the area around the centromere, and the blue represents variable regions.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ideogRam.html">ideogRam</a></span><span class="op">(</span>organism <span class="op">=</span> <span class="st">"human"</span>, chrHeight <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-5e89608fdbe29822d419" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5e89608fdbe29822d419">{"x":{"data":{"organism":"human","chrHeight":500}},"evals":[],"jsHooks":[]}</script>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ideogRam.html">ideogRam</a></span><span class="op">(</span>organism <span class="op">=</span> <span class="st">"human"</span>, chrHeight <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span></code></pre></div>
+<div id="htmlwidget-c3ebfd4d466016856cfc" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c3ebfd4d466016856cfc">{"x":{"data":{"organism":"human","chrHeight":500}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="mouse">Mouse<a class="anchor" aria-label="anchor" href="#mouse"></a>
 </h2>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ideogRam.html">ideogRam</a></span><span class="op">(</span>
-    organism <span class="op">=</span> <span class="st">"mouse"</span>,
-    orientation <span class="op">=</span> <span class="st">"horizontal"</span>,
-    showBandLabels <span class="op">=</span> <span class="cn">TRUE</span>,
-    chrHeight <span class="op">=</span> <span class="fl">300</span>
-<span class="op">)</span></code></pre></div>
-<div id="htmlwidget-709b16a796e507d700ea" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
-<script type="application/json" data-for="htmlwidget-709b16a796e507d700ea">{"x":{"data":{"organism":"mouse","orientation":"horizontal","showBandLabels":true,"chrHeight":300}},"evals":[],"jsHooks":[]}</script>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ideogRam.html">ideogRam</a></span><span class="op">(</span></span>
+<span>    organism <span class="op">=</span> <span class="st">"mouse"</span>,</span>
+<span>    orientation <span class="op">=</span> <span class="st">"horizontal"</span>,</span>
+<span>    showBandLabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    chrHeight <span class="op">=</span> <span class="fl">300</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div id="htmlwidget-51446ab4c1b0170223cb" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
+<script type="application/json" data-for="htmlwidget-51446ab4c1b0170223cb">{"x":{"data":{"organism":"mouse","orientation":"horizontal","showBandLabels":true,"chrHeight":300}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="annotations-basic">Annotations, basic<a class="anchor" aria-label="anchor" href="#annotations-basic"></a>
 </h2>
 <p>The location of BRCA1 is depicted here in red.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">brca1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges</a></span><span class="op">(</span><span class="st">'17'</span>, <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html" class="external-link">IRanges</a></span><span class="op">(</span><span class="fl">43044294</span>, <span class="fl">43125482</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"BRCA1"</span><span class="op">)</span>
-<span class="co"># This seems a bug, as it shows chromosomes 1, 7 and 17.</span>
-<span class="fu"><a href="../reference/ideogRam.html">ideogRam</a></span><span class="op">(</span>organism <span class="op">=</span> <span class="st">"human"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-    <span class="fu">set_option</span><span class="op">(</span>chromosomes <span class="op">=</span> <span class="st">'17'</span>, chrHeight <span class="op">=</span> <span class="fl">600</span>, orientation <span class="op">=</span> <span class="st">"horizontal"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-    <span class="fu">set_option</span><span class="op">(</span>showAnnotTooltip <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-    <span class="fu">add_track</span><span class="op">(</span><span class="va">brca1</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-2bcdbe0aec2f5b659278" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2bcdbe0aec2f5b659278">{"x":{"data":{"organism":"human","chromosomes":"17","chrHeight":600,"orientation":"horizontal","showAnnotTooltip":true,"annotations":[{"chr":"17","start":43044294,"stop":43125482,"name":"BRCA1"}]}},"evals":[],"jsHooks":[]}</script>
+<code class="sourceCode R"><span><span class="va">brca1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges</a></span><span class="op">(</span><span class="st">'17'</span>, <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html" class="external-link">IRanges</a></span><span class="op">(</span><span class="fl">43044294</span>, <span class="fl">43125482</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"BRCA1"</span><span class="op">)</span></span>
+<span><span class="co"># This seems a bug, as it shows chromosomes 1, 7 and 17.</span></span>
+<span><span class="fu"><a href="../reference/ideogRam.html">ideogRam</a></span><span class="op">(</span>organism <span class="op">=</span> <span class="st">"human"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    <span class="fu">set_option</span><span class="op">(</span>chromosomes <span class="op">=</span> <span class="st">'17'</span>, chrHeight <span class="op">=</span> <span class="fl">600</span>, orientation <span class="op">=</span> <span class="st">"horizontal"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    <span class="fu">set_option</span><span class="op">(</span>showAnnotTooltip <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    <span class="fu">add_track</span><span class="op">(</span><span class="va">brca1</span><span class="op">)</span></span></code></pre></div>
+<div id="htmlwidget-8d437d7670396eaf72bb" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8d437d7670396eaf72bb">{"x":{"data":{"organism":"human","chromosomes":"17","chrHeight":600,"orientation":"horizontal","showAnnotTooltip":true,"annotations":[{"chr":"17","start":43044294,"stop":43125482,"name":"BRCA1"}]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="annotations-overlaid">Annotations, overlaid<a class="anchor" aria-label="anchor" href="#annotations-overlaid"></a>
 </h2>
 <p>Large-scale structural variations (SVs) can be depicted using colored overlays, as seen below.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ten_virtual_cnvs</span> <span class="op">&lt;-</span> <span class="fu">ideogRam</span><span class="fu">:::</span><span class="fu">sample_10_virtual_cnvs</span><span class="op">(</span><span class="op">)</span>
-<span class="va">ten_virtual_cnvs</span></code></pre></div>
-<pre><code><span class="co">## GRanges object with 10 ranges and 2 metadata columns:</span>
-<span class="co">##        seqnames              ranges strand |             name</span>
-<span class="co">##           &lt;Rle&gt;           &lt;IRanges&gt;  &lt;Rle&gt; |      &lt;character&gt;</span>
-<span class="co">##    [1]        1   30000000-35999999      * |         virtual1</span>
-<span class="co">##    [2]        1   40000000-44999999      * |         virtual2</span>
-<span class="co">##    [3]        2   40738282-57863820      * |        nsv531656</span>
-<span class="co">##    [4]        2   30000000-38999999      * |                2</span>
-<span class="co">##    [5]       20   30954171-30959986      * |    observation 1</span>
-<span class="co">##    [6]        3   30000000-38999999      * |                 </span>
-<span class="co">##    [7]        3   33000000-35999999      * |         virtual3</span>
-<span class="co">##    [8]        9 120000000-128999999      * | a duplicate name</span>
-<span class="co">##    [9]        9   12000000-23999999      * | a duplicate name</span>
-<span class="co">##   [10]        X   47422351-47429070      * |    observation 2</span>
-<span class="co">##                        color</span>
-<span class="co">##                  &lt;character&gt;</span>
-<span class="co">##    [1] rgba(255, 0, 0, 0.65)</span>
-<span class="co">##    [2] rgba(0, 255, 0, 0.65)</span>
-<span class="co">##    [3] rgba(255, 0, 0, 0.65)</span>
-<span class="co">##    [4] rgba(255, 0, 0, 0.65)</span>
-<span class="co">##    [5] rgba(255, 0, 0, 0.65)</span>
-<span class="co">##    [6] rgba(0, 255, 0, 0.65)</span>
-<span class="co">##    [7] rgba(255, 0, 0, 0.65)</span>
-<span class="co">##    [8] rgba(0, 255, 0, 0.65)</span>
-<span class="co">##    [9] rgba(255, 0, 0, 0.65)</span>
-<span class="co">##   [10] rgba(0, 0, 255, 0.65)</span>
-<span class="co">##   -------</span>
-<span class="co">##   seqinfo: 6 sequences from an unspecified genome; no seqlengths</span></code></pre>
+<code class="sourceCode R"><span><span class="va">ten_virtual_cnvs</span> <span class="op">&lt;-</span> <span class="fu">ideogRam</span><span class="fu">:::</span><span class="fu">sample_10_virtual_cnvs</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">ten_virtual_cnvs</span></span></code></pre></div>
+<pre><code><span><span class="co">## GRanges object with 10 ranges and 2 metadata columns:</span></span>
+<span><span class="co">##        seqnames              ranges strand |             name</span></span>
+<span><span class="co">##           &lt;Rle&gt;           &lt;IRanges&gt;  &lt;Rle&gt; |      &lt;character&gt;</span></span>
+<span><span class="co">##    [1]        1   30000000-35999999      * |         virtual1</span></span>
+<span><span class="co">##    [2]        1   40000000-44999999      * |         virtual2</span></span>
+<span><span class="co">##    [3]        2   40738282-57863820      * |        nsv531656</span></span>
+<span><span class="co">##    [4]        2   30000000-38999999      * |                2</span></span>
+<span><span class="co">##    [5]       20   30954171-30959986      * |    observation 1</span></span>
+<span><span class="co">##    [6]        3   30000000-38999999      * |                 </span></span>
+<span><span class="co">##    [7]        3   33000000-35999999      * |         virtual3</span></span>
+<span><span class="co">##    [8]        9 120000000-128999999      * | a duplicate name</span></span>
+<span><span class="co">##    [9]        9   12000000-23999999      * | a duplicate name</span></span>
+<span><span class="co">##   [10]        X   47422351-47429070      * |    observation 2</span></span>
+<span><span class="co">##                        color</span></span>
+<span><span class="co">##                  &lt;character&gt;</span></span>
+<span><span class="co">##    [1] rgba(255, 0, 0, 0.65)</span></span>
+<span><span class="co">##    [2] rgba(0, 255, 0, 0.65)</span></span>
+<span><span class="co">##    [3] rgba(255, 0, 0, 0.65)</span></span>
+<span><span class="co">##    [4] rgba(255, 0, 0, 0.65)</span></span>
+<span><span class="co">##    [5] rgba(255, 0, 0, 0.65)</span></span>
+<span><span class="co">##    [6] rgba(0, 255, 0, 0.65)</span></span>
+<span><span class="co">##    [7] rgba(255, 0, 0, 0.65)</span></span>
+<span><span class="co">##    [8] rgba(0, 255, 0, 0.65)</span></span>
+<span><span class="co">##    [9] rgba(255, 0, 0, 0.65)</span></span>
+<span><span class="co">##   [10] rgba(0, 0, 255, 0.65)</span></span>
+<span><span class="co">##   -------</span></span>
+<span><span class="co">##   seqinfo: 6 sequences from an unspecified genome; no seqlengths</span></span></code></pre>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ideogRam.html">ideogRam</a></span><span class="op">(</span>organism <span class="op">=</span> <span class="st">"human"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-    <span class="fu">set_option</span><span class="op">(</span>chrHeight <span class="op">=</span> <span class="fl">300</span>, chrMargin <span class="op">=</span> <span class="fl">2</span>, annotationsLayout <span class="op">=</span> <span class="st">"overlay"</span>,
-               orientation <span class="op">=</span> <span class="st">"horizontal"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-    <span class="fu">add_track</span><span class="op">(</span><span class="va">ten_virtual_cnvs</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-547691d5d667d604cb3d" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
-<script type="application/json" data-for="htmlwidget-547691d5d667d604cb3d">{"x":{"data":{"organism":"human","chrHeight":300,"chrMargin":2,"annotationsLayout":"overlay","orientation":"horizontal","annotations":[{"chr":"1","start":30000000,"stop":35999999,"name":"virtual1","color":"rgba(255, 0, 0, 0.65)"},{"chr":"1","start":40000000,"stop":44999999,"name":"virtual2","color":"rgba(0, 255, 0, 0.65)"},{"chr":"2","start":40738282,"stop":57863820,"name":"nsv531656","color":"rgba(255, 0, 0, 0.65)"},{"chr":"2","start":30000000,"stop":38999999,"name":"2","color":"rgba(255, 0, 0, 0.65)"},{"chr":"20","start":30954171,"stop":30959986,"name":"observation 1","color":"rgba(255, 0, 0, 0.65)"},{"chr":"3","start":30000000,"stop":38999999,"name":" ","color":"rgba(0, 255, 0, 0.65)"},{"chr":"3","start":33000000,"stop":35999999,"name":"virtual3","color":"rgba(255, 0, 0, 0.65)"},{"chr":"9","start":120000000,"stop":128999999,"name":"a duplicate name","color":"rgba(0, 255, 0, 0.65)"},{"chr":"9","start":12000000,"stop":23999999,"name":"a duplicate name","color":"rgba(255, 0, 0, 0.65)"},{"chr":"X","start":47422351,"stop":47429070,"name":"observation 2","color":"rgba(0, 0, 255, 0.65)"}]}},"evals":[],"jsHooks":[]}</script>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ideogRam.html">ideogRam</a></span><span class="op">(</span>organism <span class="op">=</span> <span class="st">"human"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    <span class="fu">set_option</span><span class="op">(</span>chrHeight <span class="op">=</span> <span class="fl">300</span>, chrMargin <span class="op">=</span> <span class="fl">2</span>, annotationsLayout <span class="op">=</span> <span class="st">"overlay"</span>,</span>
+<span>               orientation <span class="op">=</span> <span class="st">"horizontal"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    <span class="fu">add_track</span><span class="op">(</span><span class="va">ten_virtual_cnvs</span><span class="op">)</span></span></code></pre></div>
+<div id="htmlwidget-3e4f9c79c6d55fa9bb3b" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3e4f9c79c6d55fa9bb3b">{"x":{"data":{"organism":"human","chrHeight":300,"chrMargin":2,"annotationsLayout":"overlay","orientation":"horizontal","annotations":[{"chr":"1","start":30000000,"stop":35999999,"name":"virtual1","color":"rgba(255, 0, 0, 0.65)"},{"chr":"1","start":40000000,"stop":44999999,"name":"virtual2","color":"rgba(0, 255, 0, 0.65)"},{"chr":"2","start":40738282,"stop":57863820,"name":"nsv531656","color":"rgba(255, 0, 0, 0.65)"},{"chr":"2","start":30000000,"stop":38999999,"name":"2","color":"rgba(255, 0, 0, 0.65)"},{"chr":"20","start":30954171,"stop":30959986,"name":"observation 1","color":"rgba(255, 0, 0, 0.65)"},{"chr":"3","start":30000000,"stop":38999999,"name":" ","color":"rgba(0, 255, 0, 0.65)"},{"chr":"3","start":33000000,"stop":35999999,"name":"virtual3","color":"rgba(255, 0, 0, 0.65)"},{"chr":"9","start":120000000,"stop":128999999,"name":"a duplicate name","color":"rgba(0, 255, 0, 0.65)"},{"chr":"9","start":12000000,"stop":23999999,"name":"a duplicate name","color":"rgba(255, 0, 0, 0.65)"},{"chr":"X","start":47422351,"stop":47429070,"name":"observation 2","color":"rgba(0, 0, 255, 0.65)"}]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="annotations-tracks">Annotations, tracks<a class="anchor" aria-label="anchor" href="#annotations-tracks"></a>
@@ -210,39 +210,39 @@
 <h2 id="layout-small">Layout, small<a class="anchor" aria-label="anchor" href="#layout-small"></a>
 </h2>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ideogRam.html">ideogRam</a></span><span class="op">(</span>organism <span class="op">=</span> <span class="st">"human"</span>, orientation <span class="op">=</span> <span class="st">"vertical"</span>, rows <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-    <span class="fu">set_option</span><span class="op">(</span>resolution <span class="op">=</span> <span class="fl">550</span>, chrHeight <span class="op">=</span> <span class="fl">150</span>, rotatable <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-cac309098db3a5eda080" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
-<script type="application/json" data-for="htmlwidget-cac309098db3a5eda080">{"x":{"data":{"organism":"human","orientation":"vertical","rows":2,"resolution":550,"chrHeight":150,"rotatable":false}},"evals":[],"jsHooks":[]}</script>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ideogRam.html">ideogRam</a></span><span class="op">(</span>organism <span class="op">=</span> <span class="st">"human"</span>, orientation <span class="op">=</span> <span class="st">"vertical"</span>, rows <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    <span class="fu">set_option</span><span class="op">(</span>resolution <span class="op">=</span> <span class="fl">550</span>, chrHeight <span class="op">=</span> <span class="fl">150</span>, rotatable <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div id="htmlwidget-83d03e2c39917d9ea45b" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
+<script type="application/json" data-for="htmlwidget-83d03e2c39917d9ea45b">{"x":{"data":{"organism":"human","orientation":"vertical","rows":2,"resolution":550,"chrHeight":150,"rotatable":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="brush">Brush<a class="anchor" aria-label="anchor" href="#brush"></a>
 </h2>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ideogRam.html">ideogRam</a></span><span class="op">(</span>
-    organism <span class="op">=</span> <span class="st">"human"</span>,
-    chromosome <span class="op">=</span> <span class="st">"1"</span>,
-    resolution <span class="op">=</span> <span class="fl">550</span>,
-    chrHeight <span class="op">=</span> <span class="fl">600</span>,
-    orientation <span class="op">=</span> <span class="st">"horizontal"</span>,
-    brush <span class="op">=</span> <span class="cn">TRUE</span>  <span class="co">## In the new version, we need to give a string</span>
-<span class="op">)</span></code></pre></div>
-<div id="htmlwidget-2d87d8bbc8ad897ae8e3" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2d87d8bbc8ad897ae8e3">{"x":{"data":{"organism":"human","chromosome":"1","resolution":550,"chrHeight":600,"orientation":"horizontal","brush":true}},"evals":[],"jsHooks":[]}</script>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ideogRam.html">ideogRam</a></span><span class="op">(</span></span>
+<span>    organism <span class="op">=</span> <span class="st">"human"</span>,</span>
+<span>    chromosome <span class="op">=</span> <span class="st">"1"</span>,</span>
+<span>    resolution <span class="op">=</span> <span class="fl">550</span>,</span>
+<span>    chrHeight <span class="op">=</span> <span class="fl">600</span>,</span>
+<span>    orientation <span class="op">=</span> <span class="st">"horizontal"</span>,</span>
+<span>    brush <span class="op">=</span> <span class="cn">TRUE</span>  <span class="co">## In the new version, we need to give a string</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div id="htmlwidget-77762a91e6bb3e8afe89" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
+<script type="application/json" data-for="htmlwidget-77762a91e6bb3e8afe89">{"x":{"data":{"organism":"human","chromosome":"1","resolution":550,"chrHeight":600,"orientation":"horizontal","brush":true}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="ploidy-basic">Ploidy, basic<a class="anchor" aria-label="anchor" href="#ploidy-basic"></a>
 </h2>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ideogRam.html">ideogRam</a></span><span class="op">(</span>
-    organism <span class="op">=</span> <span class="st">"human"</span>,
-    sex <span class="op">=</span> <span class="st">"female"</span>,
-    chrHeight <span class="op">=</span> <span class="fl">300</span>,
-    chrWidth <span class="op">=</span> <span class="fl">8</span>,
-    ploidy <span class="op">=</span> <span class="fl">2</span>
-<span class="op">)</span></code></pre></div>
-<div id="htmlwidget-1224668e8b43a5fd911f" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1224668e8b43a5fd911f">{"x":{"data":{"organism":"human","sex":"female","chrHeight":300,"chrWidth":8,"ploidy":2}},"evals":[],"jsHooks":[]}</script>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ideogRam.html">ideogRam</a></span><span class="op">(</span></span>
+<span>    organism <span class="op">=</span> <span class="st">"human"</span>,</span>
+<span>    sex <span class="op">=</span> <span class="st">"female"</span>,</span>
+<span>    chrHeight <span class="op">=</span> <span class="fl">300</span>,</span>
+<span>    chrWidth <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>    ploidy <span class="op">=</span> <span class="fl">2</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div id="htmlwidget-c7c4cc7ccebba0b078f1" style="width:100%;height:auto;" class="ideogRam html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c7c4cc7ccebba0b078f1">{"x":{"data":{"organism":"human","sex":"female","chrHeight":300,"chrWidth":8,"ploidy":2}},"evals":[],"jsHooks":[]}</script>
 </div>
   </div>
 
@@ -263,7 +263,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
